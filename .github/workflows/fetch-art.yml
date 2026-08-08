@@ -9,6 +9,9 @@ name: Fetch generated artwork
 
 on:
   workflow_dispatch: {}
+  push:
+    branches: ["claude/side-quests-ios-app-que8ex"]
+    paths: [".github/art-trigger"]
 
 permissions:
   contents: write
