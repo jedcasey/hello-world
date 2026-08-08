@@ -112,6 +112,7 @@ struct HomeView: View {
         .padding(18)
         .cardChrome()
         .animation(Motion.spring, value: store.totalXP)
+        .animation(Motion.spring, value: store.streak)
     }
 
     // MARK: Active quests
@@ -201,12 +202,15 @@ struct ActiveQuestCard: View {
     }
 
     var body: some View {
-        cardBody
-            .offset(x: dragX)
-            .background(alignment: .leading) { swipeHint }
-            .gesture(logSwipe)
-            .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .onTapGesture(perform: onTap)
+        ZStack(alignment: .leading) {
+            swipeHint
+
+            cardBody
+                .offset(x: dragX)
+                .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+                .onTapGesture(perform: onTap)
+        }
+        .gesture(logSwipe)
     }
 
     private var cardBody: some View {

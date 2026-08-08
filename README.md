@@ -26,14 +26,18 @@ Sixty hand-curated quests — from *"Run a 5K without stopping"* to *"Host a din
 - **Daily calls to adventure** — three suggested quests, freshly picked (deterministically) each day
 - **Celebration moments** — confetti, haptics, and rank-up reveals when a quest completes
 - **Journey screen** — rank progress, arena mastery bars, lifetime stats, and a trophy log of everything you've finished
-- **Considered design** — dark, editorial aesthetic; serif display type; category gradient system; floating pill tab bar; ambient background glows; press haptics throughout
+- **Considered design** — dark, editorial aesthetic; serif display type; per-arena gradient system; AI-generated studio artwork with one locked photographic style; a floating liquid-glass tab bar
+- **Custom Metal shaders** — living aurora background, gold shimmer sweeps, film grain over artwork, a completion shockwave, and a glass sheen on the tab bar
+- **Gestures & haptics** — swipe-to-log with rubber-banding and particle pops, CoreHaptics crescendos for completion and rank-ups, bouncy spring motion everywhere
 
 ## Tech
 
 - SwiftUI, iOS 17+, portrait iPhone
-- No dependencies — pure SwiftUI + Foundation
+- No dependencies — pure SwiftUI + Foundation + Metal + CoreHaptics
 - State persisted locally via `Codable` JSON in `UserDefaults`
 - Xcode 16 project (file-system-synchronized groups)
+- Arena artwork generated with Nano Banana 2 (Google), one locked prompt template for a consistent studio look
+- See `docs/DESIGN.md` for the design language and `docs/ARCHITECTURE.md` for structure
 
 ## Running it
 
@@ -50,8 +54,12 @@ SideQuests/
 │   ├── Models.swift           # Quest, category, difficulty, rank, progress
 │   ├── QuestLibrary.swift     # The 60-quest catalog
 │   └── QuestStore.swift       # Source of truth + persistence + stats
+├── Shaders/
+│   └── Shaders.metal          # Aurora, shimmer, grain, shockwave, sheen
 ├── Theme/
-│   └── Theme.swift            # Palette, gradients, card chrome, haptics
+│   ├── Theme.swift            # Palette, gradients, card chrome
+│   ├── Motion.swift           # Spring vocabulary + motion modifiers
+│   └── HapticsEngine.swift    # CoreHaptics patterns
 └── Views/
     ├── RootView.swift         # Shell, floating tab bar, celebration overlay
     ├── OnboardingView.swift   # Manifesto → how it works → arena picker
@@ -59,5 +67,6 @@ SideQuests/
     ├── ExploreView.swift      # Quest board + arena detail
     ├── QuestDetailView.swift  # Quest sheet: accept / log / complete / abandon
     ├── JourneyView.swift      # Rank hero, stats, mastery, trophy log
-    └── Components.swift       # Rings, bars, chips, confetti, buttons
+    ├── Components.swift       # Rings, bars, chips, confetti, buttons
+    └── Effects/               # Aurora, streamed text, bursts, artwork frame
 ```

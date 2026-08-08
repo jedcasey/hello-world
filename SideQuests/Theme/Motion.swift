@@ -19,6 +19,7 @@ struct ShimmerModifier: ViewModifier {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var start = Date()
 
+    @ViewBuilder
     func body(content: Content) -> some View {
         if reduceMotion {
             content

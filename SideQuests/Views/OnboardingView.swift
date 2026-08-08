@@ -7,54 +7,74 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer(minLength: 0)
-
-            Group {
-                switch page {
-                case 0: manifesto
-                case 1: howItWorks
-                default: arenaPicker
-                }
+            TabView(selection: $page) {
+                manifesto.tag(0)
+                howItWorks.tag(1)
+                arenaPicker.tag(2)
             }
-            .transition(.asymmetric(
-                insertion: .move(edge: .trailing).combined(with: .opacity),
-                removal: .move(edge: .leading).combined(with: .opacity)
-            ))
-
-            Spacer(minLength: 0)
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .animation(.easeOut(duration: 0.3), value: page)
 
             pageDots
-                .padding(.bottom, 24)
+                .padding(.bottom, 20)
 
             footerButton
                 .padding(.horizontal, 24)
                 .padding(.bottom, 16)
         }
-        .animation(.spring(response: 0.45, dampingFraction: 0.85), value: page)
     }
 
     // MARK: Pages
 
     private var manifesto: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            Text("Side Quests")
-                .font(.system(size: 13, weight: .bold))
-                .tracking(3.5)
-                .textCase(.uppercase)
-                .foregroundStyle(Palette.gold)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 22) {
+                ZStack(alignment: .bottomLeading) {
+                    Image("manifesto")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 300)
+                        .clipped()
+                        .filmGrain(0.05)
+                        .overlay {
+                            LinearGradient(
+                                stops: [
+                                    .init(color: .clear, location: 0.4),
+                                    .init(color: Palette.bg.opacity(0.95), location: 1),
+                                ],
+                                startPoint: .top, endPoint: .bottom
+                            )
+                        }
 
-            Text("Most men are waiting for life to become interesting.")
-                .font(.system(size: 36, weight: .bold, design: .serif))
-                .foregroundStyle(Palette.textPrimary)
-                .fixedSize(horizontal: false, vertical: true)
+                    Text("Side Quests")
+                        .font(.system(size: 13, weight: .bold))
+                        .tracking(3.5)
+                        .textCase(.uppercase)
+                        .foregroundStyle(Palette.gold)
+                        .padding(20)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 28, style: .continuous)
+                        .strokeBorder(Color.white.opacity(0.09), lineWidth: 1)
+                )
 
-            Text("Life becomes interesting the moment you treat it like a game worth playing fully.\n\nNot just the main quest. The side quests.")
-                .font(.system(size: 17))
-                .lineSpacing(5)
-                .foregroundStyle(Palette.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
+                Text("Most men are waiting for life to become interesting.")
+                    .font(.system(size: 34, weight: .bold, design: .serif))
+                    .foregroundStyle(Palette.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text("Life becomes interesting the moment you treat it like a game worth playing fully.\n\nNot just the main quest. The side quests.")
+                    .font(.system(size: 17))
+                    .lineSpacing(5)
+                    .foregroundStyle(Palette.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 12)
+            .padding(.bottom, 24)
         }
-        .padding(.horizontal, 28)
+        .scrollIndicators(.hidden)
     }
 
     private var howItWorks: some View {
@@ -76,6 +96,7 @@ struct OnboardingView: View {
                        body: "From Drifter to Legend. The rank is a mirror — the life you build along the way is the prize.")
         }
         .padding(.horizontal, 28)
+        .frame(maxHeight: .infinity)
     }
 
     private func explainRow(icon: String, tint: Color, title: String, body text: String) -> some View {
@@ -100,24 +121,29 @@ struct OnboardingView: View {
     }
 
     private var arenaPicker: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Where do you want to grow?")
-                    .font(.system(size: 30, weight: .bold, design: .serif))
-                    .foregroundStyle(Palette.textPrimary)
-                    .fixedSize(horizontal: false, vertical: true)
-                Text("Pick at least one arena. You can explore all of them anytime.")
-                    .font(.system(size: 15))
-                    .foregroundStyle(Palette.textSecondary)
-            }
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Where do you want to grow?")
+                        .font(.system(size: 30, weight: .bold, design: .serif))
+                        .foregroundStyle(Palette.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("Pick at least one arena. You can explore all of them anytime.")
+                        .font(.system(size: 15))
+                        .foregroundStyle(Palette.textSecondary)
+                }
 
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
-                ForEach(QuestCategory.allCases) { category in
-                    arenaTile(category)
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+                    ForEach(QuestCategory.allCases) { category in
+                        arenaTile(category)
+                    }
                 }
             }
+            .padding(.horizontal, 28)
+            .padding(.top, 12)
+            .padding(.bottom, 24)
         }
-        .padding(.horizontal, 28)
+        .scrollIndicators(.hidden)
     }
 
     private func arenaTile(_ category: QuestCategory) -> some View {
@@ -131,10 +157,12 @@ struct OnboardingView: View {
                     Image(systemName: category.icon)
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundStyle(isOn ? Color.white : category.accent)
+                        .symbolEffect(.bounce, value: isOn)
                     Spacer()
                     Image(systemName: isOn ? "checkmark.circle.fill" : "circle")
                         .font(.system(size: 17))
                         .foregroundStyle(isOn ? Color.white : Palette.textTertiary)
+                        .contentTransition(.symbolEffect(.replace))
                 }
                 Spacer(minLength: 0)
                 Text(category.title)
@@ -152,8 +180,8 @@ struct OnboardingView: View {
                     )
             )
         }
-        .buttonStyle(PressableStyle())
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: isOn)
+        .buttonStyle(CardPressStyle())
+        .animation(Motion.snappy, value: isOn)
     }
 
     // MARK: Chrome
@@ -164,6 +192,7 @@ struct OnboardingView: View {
                 Capsule()
                     .fill(i == page ? Palette.gold : Color.white.opacity(0.15))
                     .frame(width: i == page ? 22 : 7, height: 7)
+                    .animation(Motion.snappy, value: page)
             }
         }
     }
@@ -181,7 +210,7 @@ struct OnboardingView: View {
                 store.completeOnboarding(focus: selected)
                 Haptics.success()
             } else {
-                page += 1
+                withAnimation { page += 1 }
             }
         }
     }

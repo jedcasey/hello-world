@@ -10,10 +10,10 @@ struct JourneyView: View {
                     .font(.system(size: 34, weight: .bold, design: .serif))
                     .foregroundStyle(Palette.textPrimary)
 
-                rankHero
-                statsGrid
-                masterySection
-                trophyLog
+                rankHero.scrollEntrance()
+                statsGrid.scrollEntrance()
+                masterySection.scrollEntrance()
+                trophyLog.scrollEntrance()
             }
             .padding(.horizontal, 20)
             .padding(.top, 18)
@@ -44,11 +44,13 @@ struct JourneyView: View {
 
             VStack(spacing: 8) {
                 XPBar(progress: store.rankProgress)
+                    .shimmer()
                 HStack {
                     Text("\(store.totalXP.formatted()) XP")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundStyle(Palette.gold)
                         .monospacedDigit()
+                        .contentTransition(.numericText(value: Double(store.totalXP)))
                     Spacer()
                     if let next = store.nextRank {
                         Text("\(next.name) at \(next.xpRequired.formatted())")
@@ -197,6 +199,7 @@ struct StatTile: View {
                 .font(.system(size: 26, weight: .heavy, design: .rounded))
                 .foregroundStyle(Palette.textPrimary)
                 .monospacedDigit()
+                .contentTransition(.numericText())
 
             Text(label)
                 .font(.system(size: 12, weight: .medium))

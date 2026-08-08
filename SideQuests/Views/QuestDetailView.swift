@@ -6,6 +6,7 @@ struct QuestDetailView: View {
     let quest: Quest
 
     @State private var confirmingAbandon = false
+    @State private var burst = 0
 
     var body: some View {
         ScrollView {
@@ -19,18 +20,15 @@ struct QuestDetailView: View {
             .padding(.bottom, 40)
         }
         .scrollIndicators(.hidden)
-        .background(
-            ZStack {
-                Palette.bgElevated
-                RadialGradient(
-                    colors: [quest.category.accent.opacity(0.16), .clear],
-                    center: .top, startRadius: 10, endRadius: 420
-                )
-            }
-            .ignoresSafeArea()
-        )
+        .background { backdrop }
         .presentationDetents([.large])
         .presentationDragIndicator(.visible)
+        .presentationCornerRadius(36)
+        // The celebration overlay lives in RootView, underneath this sheet's
+        // presentation layer — step out of the way the moment it fires.
+        .onChange(of: store.celebration?.id) { _, newValue in
+            if newValue != nil { dismiss() }
+        }
         .confirmationDialog(
             "Abandon this quest?",
             isPresented: $confirmingAbandon,
@@ -44,6 +42,31 @@ struct QuestDetailView: View {
         } message: {
             Text("Your progress will be lost. The quest returns to the board.")
         }
+    }
+
+    // The arena photograph sits behind everything, heavily veiled, so the
+    // sheet inherits the arena's atmosphere without fighting the text.
+    private var backdrop: some View {
+        ZStack {
+            Palette.bgElevated
+
+            VStack(spacing: 0) {
+                ArenaImage(category: quest.category, scrim: false)
+                    .frame(height: 360)
+                    .overlay {
+                        LinearGradient(
+                            stops: [
+                                .init(color: Palette.bgElevated.opacity(0.55), location: 0),
+                                .init(color: Palette.bgElevated.opacity(0.85), location: 0.6),
+                                .init(color: Palette.bgElevated, location: 1),
+                            ],
+                            startPoint: .top, endPoint: .bottom
+                        )
+                    }
+                Spacer(minLength: 0)
+            }
+        }
+        .ignoresSafeArea()
     }
 
     // MARK: Hero
@@ -69,12 +92,13 @@ struct QuestDetailView: View {
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text(quest.flavor)
-                .font(.system(size: 16))
-                .lineSpacing(5)
-                .foregroundStyle(Palette.textSecondary)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+            StreamedText(
+                text: quest.flavor,
+                font: .system(size: 16),
+                color: Palette.textSecondary
+            )
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -132,12 +156,15 @@ struct QuestDetailView: View {
                             .font(.system(size: 38, weight: .heavy, design: .rounded))
                             .foregroundStyle(Palette.textPrimary)
                             .monospacedDigit()
+                            .contentTransition(.numericText(value: Double(count)))
                         Text("of \(quest.target) \(quest.unit)")
                             .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(Palette.textSecondary)
                     }
+                    PopBurst(trigger: burst, colors: quest.category.gradientColors)
                 }
                 .padding(.top, 4)
+                .animation(Motion.spring, value: count)
 
                 PrimaryButton(
                     title: doneToday ? "Logged — come back tomorrow" : "Log a \(quest.unitSingular)",
@@ -145,6 +172,7 @@ struct QuestDetailView: View {
                     icon: doneToday ? "checkmark" : "plus",
                     disabled: doneToday
                 ) {
+                    burst += 1
                     store.logStep(quest)
                 }
             } else {
@@ -191,6 +219,7 @@ struct QuestDetailView: View {
             }
             .padding(16)
             .cardChrome(radius: 20, fill: Palette.cardStrong)
+            .shimmer()
 
             Text("This one is part of your story now.")
                 .font(.system(size: 13))
