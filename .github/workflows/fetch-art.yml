@@ -35,14 +35,23 @@ jobs:
             [creative]="86732c78-05a9-44bf-bdda-35de0ecf90f1"
             [manifesto]="b466f447-afd0-4ec7-9466-0267059ff3fb"
           )
-          for name in physical mental financial social adventure creative; do
+          pip install --quiet pillow
+          for name in physical mental financial social adventure creative manifesto; do
             curl -fsSL -o "/tmp/$name.png" "$base/hf_20260808_164200_${imgs[$name]}.png"
-            convert "/tmp/$name.png" -resize '1024x1024>' -strip -quality 85 \
-              "SideQuests/Assets.xcassets/arena-$name.imageset/$name.jpg"
           done
-          curl -fsSL -o /tmp/manifesto.png "$base/hf_20260808_164200_${imgs[manifesto]}.png"
-          convert /tmp/manifesto.png -resize '1024x1280>' -strip -quality 85 \
-            "SideQuests/Assets.xcassets/manifesto.imageset/manifesto.jpg"
+          python3 - <<'EOF'
+          from PIL import Image
+          names = ["physical", "mental", "financial", "social", "adventure", "creative"]
+          for name in names:
+              im = Image.open(f"/tmp/{name}.png").convert("RGB")
+              im.thumbnail((1024, 1024), Image.LANCZOS)
+              im.save(f"SideQuests/Assets.xcassets/arena-{name}.imageset/{name}.jpg",
+                      "JPEG", quality=85, optimize=True)
+          im = Image.open("/tmp/manifesto.png").convert("RGB")
+          im.thumbnail((1024, 1280), Image.LANCZOS)
+          im.save("SideQuests/Assets.xcassets/manifesto.imageset/manifesto.jpg",
+                  "JPEG", quality=85, optimize=True)
+          EOF
           ls -la SideQuests/Assets.xcassets/*/*.jpg
 
       - name: Commit artwork

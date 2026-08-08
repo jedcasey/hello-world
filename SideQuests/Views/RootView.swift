@@ -26,7 +26,7 @@ struct RootView: View {
 
     var body: some View {
         ZStack {
-            AmbientBackground()
+            AuroraBackground()
 
             if store.hasOnboarded {
                 ZStack(alignment: .bottom) {
@@ -58,11 +58,12 @@ struct RootView: View {
     }
 }
 
-// MARK: - Floating tab bar
+// MARK: - Floating liquid-glass tab bar
 
 struct TabBar: View {
     @Binding var selection: Tab
     @Namespace private var pill
+    @State private var start = Date()
 
     var body: some View {
         HStack(spacing: 4) {
@@ -70,7 +71,7 @@ struct TabBar: View {
                 let isSelected = tab == selection
                 Button {
                     guard selection != tab else { return }
-                    withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                    withAnimation(Motion.bouncy) {
                         selection = tab
                     }
                     Haptics.light()
@@ -78,6 +79,7 @@ struct TabBar: View {
                     HStack(spacing: 7) {
                         Image(systemName: tab.icon)
                             .font(.system(size: 15, weight: .semibold))
+                            .symbolEffect(.bounce, value: isSelected)
                         if isSelected {
                             Text(tab.title)
                                 .font(.system(size: 14, weight: .bold))
@@ -91,6 +93,7 @@ struct TabBar: View {
                         if isSelected {
                             Capsule()
                                 .fill(Color.white.opacity(0.10))
+                                .shadow(color: Palette.gold.opacity(0.25), radius: 12)
                                 .matchedGeometryEffect(id: "pill", in: pill)
                         }
                     }
@@ -100,7 +103,25 @@ struct TabBar: View {
         }
         .padding(5)
         .background(.ultraThinMaterial, in: Capsule())
+        .overlay {
+            // Living specular pass over the glass, clipped to the capsule.
+            TimelineView(.animation(minimumInterval: 1.0 / 20.0)) { timeline in
+                let t = timeline.date.timeIntervalSince(start)
+                Capsule()
+                    .fill(Color.white.opacity(0.055))
+                    .visualEffect { view, proxy in
+                        view.colorEffect(
+                            ShaderLibrary.glassSheen(
+                                .float2(proxy.size),
+                                .float(t)
+                            )
+                        )
+                    }
+                    .allowsHitTesting(false)
+            }
+        }
         .overlay(Capsule().strokeBorder(Color.white.opacity(0.09), lineWidth: 1))
+        .clipShape(Capsule())
         .shadow(color: .black.opacity(0.4), radius: 20, y: 8)
     }
 }
@@ -112,76 +133,107 @@ struct CelebrationView: View {
     let celebration: Celebration
 
     @State private var appeared = false
+    @State private var shownAt = Date()
+    @State private var xpShown = 0
 
     var body: some View {
         ZStack {
             Color.black.opacity(0.78).ignoresSafeArea()
             ConfettiView().ignoresSafeArea()
 
-            VStack(spacing: 18) {
-                Image(systemName: celebration.quest.category.icon)
-                    .font(.system(size: 34, weight: .semibold))
-                    .foregroundStyle(.white)
-                    .frame(width: 88, height: 88)
-                    .background(Circle().fill(celebration.quest.category.gradient))
-                    .shadow(color: celebration.quest.category.accent.opacity(0.5), radius: 24)
-
-                Text("Quest complete")
-                    .font(.system(size: 13, weight: .bold))
-                    .tracking(3)
-                    .textCase(.uppercase)
-                    .foregroundStyle(Palette.gold)
-
-                Text(celebration.quest.title)
-                    .font(.system(size: 28, weight: .bold, design: .serif))
-                    .foregroundStyle(Palette.textPrimary)
-                    .multilineTextAlignment(.center)
-
-                Text("+\(celebration.xpEarned) XP")
-                    .font(.system(size: 22, weight: .heavy, design: .rounded))
-                    .foregroundStyle(Palette.gold)
-                    .monospacedDigit()
-
-                if let newRank = celebration.newRank {
-                    VStack(spacing: 4) {
-                        Text("New rank unlocked")
-                            .font(.system(size: 12, weight: .bold))
-                            .tracking(2)
-                            .textCase(.uppercase)
-                            .foregroundStyle(Palette.textSecondary)
-                        Text(newRank.name)
-                            .font(.system(size: 24, weight: .bold, design: .serif))
-                            .foregroundStyle(Palette.textPrimary)
-                        Text(newRank.motto)
-                            .font(.system(size: 13))
-                            .foregroundStyle(Palette.textSecondary)
+            TimelineView(.animation(minimumInterval: 1.0 / 60.0)) { timeline in
+                let t = timeline.date.timeIntervalSince(shownAt)
+                card
+                    .visualEffect { view, proxy in
+                        view.distortionEffect(
+                            ShaderLibrary.shockwave(
+                                .float2(proxy.size),
+                                .float(min(1.3, t)),
+                                .float(t < 1.3 ? 24 : 0)
+                            ),
+                            maxSampleOffset: CGSize(width: 40, height: 40)
+                        )
                     }
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 24)
-                    .cardChrome(radius: 20, fill: Palette.cardStrong)
-                }
-
-                Button {
-                    store.celebration = nil
-                } label: {
-                    Text("Onward")
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundStyle(.black)
-                        .padding(.horizontal, 44)
-                        .padding(.vertical, 15)
-                        .background(Capsule().fill(Palette.gold))
-                }
-                .buttonStyle(PressableStyle())
-                .padding(.top, 10)
             }
-            .padding(32)
-            .scaleEffect(appeared ? 1 : 0.85)
-            .opacity(appeared ? 1 : 0)
         }
         .onAppear {
+            shownAt = Date()
             withAnimation(.spring(response: 0.45, dampingFraction: 0.75)) {
                 appeared = true
             }
+            // Count the XP up once the card has landed.
+            withAnimation(Motion.spring.delay(0.35)) {
+                xpShown = celebration.xpEarned
+            }
+            if celebration.newRank != nil {
+                Haptics.rankUp()
+            } else {
+                Haptics.questComplete()
+            }
         }
+    }
+
+    private var card: some View {
+        VStack(spacing: 18) {
+            Image(systemName: celebration.quest.category.icon)
+                .font(.system(size: 34, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(width: 88, height: 88)
+                .background(Circle().fill(celebration.quest.category.gradient))
+                .shadow(color: celebration.quest.category.accent.opacity(0.5), radius: 24)
+
+            Text("Quest complete")
+                .font(.system(size: 13, weight: .bold))
+                .tracking(3)
+                .textCase(.uppercase)
+                .foregroundStyle(Palette.gold)
+
+            Text(celebration.quest.title)
+                .font(.system(size: 28, weight: .bold, design: .serif))
+                .foregroundStyle(Palette.textPrimary)
+                .multilineTextAlignment(.center)
+
+            Text("+\(xpShown) XP")
+                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                .foregroundStyle(Palette.gold)
+                .monospacedDigit()
+                .contentTransition(.numericText(value: Double(xpShown)))
+                .shimmer()
+
+            if let newRank = celebration.newRank {
+                VStack(spacing: 4) {
+                    Text("New rank unlocked")
+                        .font(.system(size: 12, weight: .bold))
+                        .tracking(2)
+                        .textCase(.uppercase)
+                        .foregroundStyle(Palette.textSecondary)
+                    Text(newRank.name)
+                        .font(.system(size: 24, weight: .bold, design: .serif))
+                        .foregroundStyle(Palette.textPrimary)
+                    Text(newRank.motto)
+                        .font(.system(size: 13))
+                        .foregroundStyle(Palette.textSecondary)
+                }
+                .padding(.vertical, 16)
+                .padding(.horizontal, 24)
+                .cardChrome(radius: 20, fill: Palette.cardStrong)
+            }
+
+            Button {
+                store.celebration = nil
+            } label: {
+                Text("Onward")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundStyle(.black)
+                    .padding(.horizontal, 44)
+                    .padding(.vertical, 15)
+                    .background(Capsule().fill(Palette.gold))
+            }
+            .buttonStyle(PressableStyle())
+            .padding(.top, 10)
+        }
+        .padding(32)
+        .scaleEffect(appeared ? 1 : 0.85)
+        .opacity(appeared ? 1 : 0)
     }
 }

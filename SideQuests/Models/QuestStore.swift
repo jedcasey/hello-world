@@ -95,10 +95,10 @@ final class QuestStore: ObservableObject {
                 xpEarned: quest.difficulty.xp,
                 newRank: rankAfter != rankBefore ? rankAfter : nil
             )
-            Haptics.success()
+            // The celebration overlay owns the completion haptic crescendo.
         } else {
             progress[quest.id] = p
-            Haptics.light()
+            Haptics.logStep()
         }
         save()
     }

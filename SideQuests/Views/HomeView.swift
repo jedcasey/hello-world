@@ -79,6 +79,7 @@ struct HomeView: View {
                             .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(Palette.textSecondary)
                             .monospacedDigit()
+                            .contentTransition(.numericText(value: Double(store.totalXP)))
                     } else {
                         Text("\(store.totalXP.formatted()) XP — the summit")
                             .font(.system(size: 13, weight: .medium))
@@ -93,10 +94,12 @@ struct HomeView: View {
                         Image(systemName: "flame.fill")
                             .font(.system(size: 15))
                             .foregroundStyle(QuestCategory.physical.accent)
+                            .symbolEffect(.variableColor.iterative, options: .repeating)
                         Text("\(store.streak)")
                             .font(.system(size: 15, weight: .heavy, design: .rounded))
                             .foregroundStyle(Palette.textPrimary)
                             .monospacedDigit()
+                            .contentTransition(.numericText(value: Double(store.streak)))
                     }
                     .frame(width: 46, height: 46)
                     .background(Circle().fill(Color.white.opacity(0.06)))
@@ -104,21 +107,24 @@ struct HomeView: View {
             }
 
             XPBar(progress: store.rankProgress)
+                .shimmer()
         }
         .padding(18)
         .cardChrome()
+        .animation(Motion.spring, value: store.totalXP)
     }
 
     // MARK: Active quests
 
     private var activeSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            SectionHeader(title: "Active quests")
+            SectionHeader(title: "Active quests", subtitle: "Swipe a quest to log progress.")
 
             ForEach(store.activeQuests, id: \.quest.id) { pair in
                 ActiveQuestCard(quest: pair.quest, progress: pair.progress) {
                     selectedQuest = pair.quest
                 }
+                .scrollEntrance()
             }
         }
     }
@@ -139,7 +145,7 @@ struct HomeView: View {
                 colors: [Palette.gold, Color(red: 0.87, green: 0.49, blue: 0.16)],
                 icon: "map.fill"
             ) {
-                withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                withAnimation(Motion.bouncy) {
                     tab = .quests
                 }
             }
@@ -161,6 +167,7 @@ struct HomeView: View {
                         SuggestionCard(quest: quest) {
                             selectedQuest = quest
                         }
+                        .scrollEntrance()
                     }
                 }
             }
@@ -169,6 +176,9 @@ struct HomeView: View {
 }
 
 // MARK: - Active quest card
+// Tap opens the quest. Swiping right drags the card against a spring and,
+// past the threshold, logs a step with a particle pop — progress without
+// ever leaving the home screen.
 
 struct ActiveQuestCard: View {
     @EnvironmentObject private var store: QuestStore
@@ -176,11 +186,30 @@ struct ActiveQuestCard: View {
     let progress: QuestProgress
     var onTap: () -> Void
 
+    @State private var dragX: CGFloat = 0
+    @State private var armed = false
+    @State private var burst = 0
+
+    private let threshold: CGFloat = 72
+
     private var fraction: Double {
         quest.target > 0 ? Double(progress.count) / Double(quest.target) : 0
     }
 
+    private var canLog: Bool {
+        !store.loggedToday(quest)
+    }
+
     var body: some View {
+        cardBody
+            .offset(x: dragX)
+            .background(alignment: .leading) { swipeHint }
+            .gesture(logSwipe)
+            .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .onTapGesture(perform: onTap)
+    }
+
+    private var cardBody: some View {
         HStack(spacing: 14) {
             ZStack {
                 ProgressRing(progress: fraction, colors: quest.category.gradientColors, lineWidth: 4.5)
@@ -202,6 +231,7 @@ struct ActiveQuestCard: View {
                         .font(.system(size: 13))
                         .foregroundStyle(Palette.textSecondary)
                         .monospacedDigit()
+                        .contentTransition(.numericText(value: Double(progress.count)))
                 } else {
                     Text(quest.category.title)
                         .font(.system(size: 13))
@@ -212,32 +242,78 @@ struct ActiveQuestCard: View {
             Spacer(minLength: 8)
 
             logButton
+                .overlay(PopBurst(trigger: burst, colors: quest.category.gradientColors))
         }
         .padding(14)
         .cardChrome(radius: 22)
-        .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .onTapGesture(perform: onTap)
+        .animation(Motion.spring, value: progress.count)
     }
 
     private var logButton: some View {
-        let doneToday = store.loggedToday(quest)
-        return Button {
+        Button {
+            guard canLog else { return }
+            burst += 1
             store.logStep(quest)
         } label: {
-            Image(systemName: doneToday ? "checkmark" : "plus")
+            Image(systemName: canLog ? "plus" : "checkmark")
                 .font(.system(size: 15, weight: .bold))
-                .foregroundStyle(doneToday ? quest.category.accent : .white)
+                .foregroundStyle(canLog ? .white : quest.category.accent)
+                .contentTransition(.symbolEffect(.replace))
                 .frame(width: 40, height: 40)
                 .background(
                     Circle().fill(
-                        doneToday
-                            ? AnyShapeStyle(Color.white.opacity(0.07))
-                            : AnyShapeStyle(quest.category.gradient)
+                        canLog
+                            ? AnyShapeStyle(quest.category.gradient)
+                            : AnyShapeStyle(Color.white.opacity(0.07))
                     )
                 )
         }
         .buttonStyle(PressableStyle())
-        .disabled(doneToday)
+        .disabled(!canLog)
+    }
+
+    private var swipeHint: some View {
+        HStack(spacing: 6) {
+            Image(systemName: armed ? "checkmark.circle.fill" : "plus.circle")
+                .font(.system(size: 20, weight: .semibold))
+                .contentTransition(.symbolEffect(.replace))
+            Text("+1")
+                .font(.system(size: 15, weight: .heavy, design: .rounded))
+        }
+        .foregroundStyle(quest.category.accent)
+        .opacity(min(1, dragX / threshold))
+        .scaleEffect(armed ? 1.15 : 1, anchor: .leading)
+        .padding(.leading, 6)
+        .animation(Motion.snappy, value: armed)
+    }
+
+    private var logSwipe: some Gesture {
+        DragGesture(minimumDistance: 24)
+            .onChanged { value in
+                guard canLog,
+                      abs(value.translation.width) > abs(value.translation.height) * 1.2,
+                      value.translation.width > 0
+                else { return }
+
+                let x = value.translation.width
+                // Rubber band past the threshold so the card feels alive.
+                dragX = x <= threshold ? x : threshold + (x - threshold) * 0.3
+
+                if dragX >= threshold && !armed {
+                    armed = true
+                    Haptics.medium()
+                } else if dragX < threshold && armed {
+                    armed = false
+                }
+            }
+            .onEnded { _ in
+                if armed && canLog {
+                    burst += 1
+                    store.logStep(quest)
+                }
+                armed = false
+                withAnimation(Motion.snappy) { dragX = 0 }
+            }
     }
 }
 
@@ -283,6 +359,6 @@ struct SuggestionCard: View {
             .padding(14)
             .cardChrome(radius: 22)
         }
-        .buttonStyle(PressableStyle())
+        .buttonStyle(CardPressStyle())
     }
 }
