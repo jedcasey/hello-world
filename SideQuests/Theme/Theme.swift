@@ -67,17 +67,6 @@ extension View {
     }
 }
 
-// MARK: - Button press feel
-
-struct PressableStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .opacity(configuration.isPressed ? 0.85 : 1)
-            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: configuration.isPressed)
-    }
-}
-
 // MARK: - Ambient background
 
 /// Near-black backdrop with two faint colored glows for depth.
@@ -98,12 +87,4 @@ struct AmbientBackground: View {
         }
         .ignoresSafeArea()
     }
-}
-
-// MARK: - Haptics
-
-enum Haptics {
-    static func light()  { UIImpactFeedbackGenerator(style: .light).impactOccurred() }
-    static func medium() { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
-    static func success() { UINotificationFeedbackGenerator().notificationOccurred(.success) }
 }

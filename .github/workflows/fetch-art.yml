@@ -1,0 +1,51 @@
+# One-shot utility workflow: downloads the AI-generated arena artwork
+# (created with Nano Banana 2 via Higgsfield) from its CDN, compresses it
+# to app-appropriate JPEGs, and commits the files into the asset catalog.
+#
+# Exists because the development sandbox's egress policy can't reach the
+# media CDN directly. Manually triggered; safe to delete after the art
+# is committed.
+name: Fetch generated artwork
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download and process artwork
+        run: |
+          set -euo pipefail
+          base="https://d8j0ntlcm91z4.cloudfront.net/user_3GD9ovSU1M53neXdHslx6HlQ6NV"
+          declare -A imgs=(
+            [physical]="3e69b3cc-80d4-41a3-8c72-546eb3673fe2"
+            [mental]="4285d2f2-ad6a-418a-befc-012c8db54bb9"
+            [financial]="5015daa4-e5ae-4ff1-8682-5b4a81835fd3"
+            [social]="d3c4250f-daad-4be2-ae73-59f7d21cb1b1"
+            [adventure]="89c023ad-3fbd-4c2a-84d6-7c56a253b75b"
+            [creative]="86732c78-05a9-44bf-bdda-35de0ecf90f1"
+            [manifesto]="b466f447-afd0-4ec7-9466-0267059ff3fb"
+          )
+          for name in physical mental financial social adventure creative; do
+            curl -fsSL -o "/tmp/$name.png" "$base/hf_20260808_164200_${imgs[$name]}.png"
+            convert "/tmp/$name.png" -resize '1024x1024>' -strip -quality 85 \
+              "SideQuests/Assets.xcassets/arena-$name.imageset/$name.jpg"
+          done
+          curl -fsSL -o /tmp/manifesto.png "$base/hf_20260808_164200_${imgs[manifesto]}.png"
+          convert /tmp/manifesto.png -resize '1024x1280>' -strip -quality 85 \
+            "SideQuests/Assets.xcassets/manifesto.imageset/manifesto.jpg"
+          ls -la SideQuests/Assets.xcassets/*/*.jpg
+
+      - name: Commit artwork
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add SideQuests/Assets.xcassets
+          git commit -m "Add generated arena artwork (fetched by CI)"
+          git push
