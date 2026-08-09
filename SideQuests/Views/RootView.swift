@@ -54,7 +54,7 @@ struct RootView: View {
         }
         .animation(.easeOut(duration: 0.3), value: store.celebration?.id)
         .animation(.easeOut(duration: 0.4), value: store.hasOnboarded)
-        .preferredColorScheme(.light)
+        .preferredColorScheme(.dark)
     }
 }
 
@@ -122,7 +122,7 @@ struct TabBar: View {
         }
         .overlay(Capsule().strokeBorder(Palette.stroke, lineWidth: 1))
         .clipShape(Capsule())
-        .shadow(color: .black.opacity(0.12), radius: 20, y: 8)
+        .shadow(color: .black.opacity(0.45), radius: 20, y: 8)
     }
 }
 
@@ -138,7 +138,7 @@ struct CelebrationView: View {
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.35).ignoresSafeArea()
+            Color.black.opacity(0.72).ignoresSafeArea()
             ConfettiView().ignoresSafeArea()
 
             TimelineView(.animation(minimumInterval: 1.0 / 60.0)) { timeline in
@@ -224,7 +224,7 @@ struct CelebrationView: View {
             } label: {
                 Text("Onward")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .padding(.horizontal, 44)
                     .padding(.vertical, 15)
                     .background(Capsule().fill(Palette.gold))
@@ -236,7 +236,7 @@ struct CelebrationView: View {
         .background(
             RoundedRectangle(cornerRadius: 36, style: .continuous)
                 .fill(Palette.bg)
-                .shadow(color: .black.opacity(0.18), radius: 40, y: 16)
+                .shadow(color: .black.opacity(0.6), radius: 40, y: 16)
         )
         .padding(.horizontal, 24)
         .scaleEffect(appeared ? 1 : 0.85)

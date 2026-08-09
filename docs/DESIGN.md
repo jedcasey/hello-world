@@ -1,26 +1,27 @@
-# Side Quests — Design Language (Daybreak)
+# Side Quests — Design Language (Nightfall)
 
-The app should feel like the first hour of a good morning: light, warm,
-and quietly determined. Clean surfaces, one ember accent, photography shot
-in a single morning light. Every choice below serves that.
+The app should feel like a quiet instrument: near-black, typographic,
+unhurried. Hierarchy comes from steps of white and from spacing, never
+from decoration; the dark photography carries the mood. Every choice
+below serves that.
 
 ## Foundations
 
 | Element | Choice | Why |
 | --- | --- | --- |
-| Ground | Warm ivory `#FBFAF6` with a living morning-light shader | Airy and optimistic; the app breathes |
-| Display type | SF Pro (`.default`), bold, tight tracking | Clean confidence for titles and rank names |
+| Ground | Near-black `#060607` with a living smoke shader | Depth without decoration; the app breathes |
+| Display type | SF Pro (`.default`), bold, tight tracking | Typography does the work |
 | Body type | SF Pro, 13–17pt | Quiet, legible counterpoint |
-| Numbers | Rounded + monospaced digits | Game-y warmth, no layout jitter |
-| Chrome | White cards, warm hairlines, soft shadows, 20–24pt continuous radii | Surfaces feel like good paper |
-| Ember `#F4611F → #FFAF3C` | Reserved for XP, rank, and reward moments | Scarcity keeps it meaningful |
+| Numbers | Rounded + monospaced digits | Precision without layout jitter |
+| Chrome | 4% white fills, 8% white hairlines, flat (no shadows) | Rows, not boxes |
+| Champagne `#EBE1CC` | Reserved for XP, rank, and reward moments | Barely a color; scarcity keeps it meaningful |
 
 ## Arena system
 
-Each of the six arenas owns a two-stop gradient and one still-life
+Each of the six arenas owns a two-stop dusty gradient and one night
 photograph (generated with Nano Banana 2, single locked prompt template:
-warm ivory seamless backdrop, golden morning sunlight upper-left,
-arena-accent glow right, airy negative space).
+subject emerging from deep darkness, one faint cold light, black negative
+space, near-monochrome charcoal palette, 35mm grain).
 The gradient colors every ring, bar, icon, and button for that arena's
 quests; the photograph carries the card, the arena hero, and the quest
 sheet backdrop. Film grain (shader) unifies photograph and UI.
@@ -41,8 +42,8 @@ rest of the app doesn't use.
 
 Signature moves:
 
-- **Aurora** — full-screen fbm shader drifting at 24fps; amber, rose and
-  airy violet breathing through warm ivory.
+- **Aurora** — full-screen fbm shader drifting at 24fps; charcoal smoke
+  and a whisper of cool blue breathing through near-black.
 - **Shimmer** — a specular band sweeps gold surfaces every 3.6s.
 - **Glass sheen** — the tab bar is material + a shader that plays a bright
   top edge and a slow drifting highlight across it, like light on curved glass.

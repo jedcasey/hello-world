@@ -26,7 +26,7 @@ Sixty hand-curated quests — from *"Run a 5K without stopping"* to *"Host a din
 - **Daily calls to adventure** — three suggested quests, freshly picked (deterministically) each day
 - **Celebration moments** — confetti, haptics, and rank-up reveals when a quest completes
 - **Journey screen** — rank progress, arena mastery bars, lifetime stats, and a trophy log of everything you've finished
-- **Considered design** — light, warm “Daybreak” aesthetic; clean SF display type; per-arena gradient system; AI-generated morning-light artwork with one locked photographic style; a floating liquid-glass tab bar
+- **Considered design** — near-black, typographic “Nightfall” aesthetic; hierarchy in steps of white; dusty per-arena tones; AI-generated night photography with one locked cinematic style; a floating liquid-glass tab bar
 - **Custom Metal shaders** — living aurora background, gold shimmer sweeps, film grain over artwork, a completion shockwave, and a glass sheen on the tab bar
 - **Gestures & haptics** — swipe-to-log with rubber-banding and particle pops, CoreHaptics crescendos for completion and rank-ups, bouncy spring motion everywhere
 

@@ -2,49 +2,53 @@ import SwiftUI
 import UIKit
 
 // MARK: - Palette
-// Daybreak: warm ivory paper, dark warm ink, and one ember accent reserved
-// for XP, rank and reward moments.
+// Nightfall: near-black ground, typography-first hierarchy in steps of white,
+// and one quiet champagne accent reserved for XP, rank and reward moments.
+// Color is rationed; the dark photography carries the mood.
 
 enum Palette {
-    static let bg           = Color(red: 0.984, green: 0.980, blue: 0.965)
-    static let bgElevated   = Color.white
-    static let card         = Color.white
-    static let cardStrong   = Color(red: 0.961, green: 0.949, blue: 0.918)
-    static let stroke       = Color(red: 0.36, green: 0.31, blue: 0.22).opacity(0.14)
-    static let textPrimary  = Color(red: 0.110, green: 0.094, blue: 0.066)
-    static let textSecondary = Color(red: 0.43, green: 0.40, blue: 0.35)
-    static let textTertiary = Color(red: 0.64, green: 0.61, blue: 0.55)
+    static let bg           = Color(red: 0.024, green: 0.024, blue: 0.028)
+    static let bgElevated   = Color(red: 0.055, green: 0.055, blue: 0.062)
+    static let card         = Color.white.opacity(0.038)
+    static let cardStrong   = Color.white.opacity(0.07)
+    static let stroke       = Color.white.opacity(0.08)
+    static let textPrimary  = Color(white: 0.96)
+    static let textSecondary = Color(white: 0.55)
+    static let textTertiary = Color(white: 0.33)
 
-    /// The reward accent. Historically "gold"; in Daybreak it is a sunrise
-    /// ember — the name stays so call sites don't churn.
-    static let gold         = Color(red: 0.957, green: 0.380, blue: 0.122)
+    /// The reward accent. Historically "gold"; in Nightfall it is a muted
+    /// champagne — barely a color at all. The name stays so call sites
+    /// don't churn.
+    static let gold         = Color(red: 0.92, green: 0.88, blue: 0.80)
     /// Second stop of the reward gradient.
-    static let goldDeep     = Color(red: 1.00, green: 0.686, blue: 0.235)
+    static let goldDeep     = Color(red: 0.70, green: 0.66, blue: 0.58)
 
-    /// Neutral fills for chips, discs and inactive states on the light ground.
-    static let fill         = Color(red: 0.36, green: 0.31, blue: 0.22).opacity(0.06)
-    static let fillStrong   = Color(red: 0.36, green: 0.31, blue: 0.22).opacity(0.11)
-    /// Soft warm wash behind ember iconography.
-    static let accentSoft   = Color(red: 0.996, green: 0.953, blue: 0.910)
+    /// Neutral fills for chips, discs and inactive states.
+    static let fill         = Color.white.opacity(0.05)
+    static let fillStrong   = Color.white.opacity(0.10)
+    /// Soft wash behind accent iconography.
+    static let accentSoft   = Color.white.opacity(0.06)
 }
 
 // MARK: - Category colors
+// Dusty, desaturated arena tones — visible in rings and bars without ever
+// shouting against the monochrome ground.
 
 extension QuestCategory {
     var gradientColors: [Color] {
         switch self {
         case .physical:
-            return [Color(red: 1.00, green: 0.44, blue: 0.22), Color(red: 0.88, green: 0.19, blue: 0.26)]
+            return [Color(red: 0.80, green: 0.46, blue: 0.38), Color(red: 0.60, green: 0.30, blue: 0.28)]
         case .mental:
-            return [Color(red: 0.48, green: 0.45, blue: 1.00), Color(red: 0.30, green: 0.24, blue: 0.86)]
+            return [Color(red: 0.55, green: 0.53, blue: 0.78), Color(red: 0.39, green: 0.36, blue: 0.62)]
         case .financial:
-            return [Color(red: 0.94, green: 0.64, blue: 0.14), Color(red: 0.82, green: 0.49, blue: 0.07)]
+            return [Color(red: 0.78, green: 0.65, blue: 0.42), Color(red: 0.60, green: 0.47, blue: 0.27)]
         case .social:
-            return [Color(red: 1.00, green: 0.46, blue: 0.56), Color(red: 0.84, green: 0.22, blue: 0.45)]
+            return [Color(red: 0.78, green: 0.47, blue: 0.53), Color(red: 0.58, green: 0.31, blue: 0.40)]
         case .adventure:
-            return [Color(red: 0.14, green: 0.71, blue: 0.51), Color(red: 0.09, green: 0.51, blue: 0.43)]
+            return [Color(red: 0.38, green: 0.62, blue: 0.52), Color(red: 0.24, green: 0.44, blue: 0.39)]
         case .creative:
-            return [Color(red: 0.73, green: 0.42, blue: 1.00), Color(red: 0.51, green: 0.27, blue: 0.90)]
+            return [Color(red: 0.62, green: 0.48, blue: 0.76), Color(red: 0.45, green: 0.33, blue: 0.59)]
         }
     }
 
@@ -56,6 +60,8 @@ extension QuestCategory {
 }
 
 // MARK: - Card chrome
+// Flat by intent: a whisper of fill and a hairline. No drop shadows —
+// hierarchy comes from type and spacing, not elevation.
 
 struct CardBackground: ViewModifier {
     var radius: CGFloat
@@ -70,7 +76,6 @@ struct CardBackground: ViewModifier {
                         RoundedRectangle(cornerRadius: radius, style: .continuous)
                             .strokeBorder(Palette.stroke, lineWidth: 1)
                     )
-                    .shadow(color: Color(red: 0.30, green: 0.24, blue: 0.12).opacity(0.07), radius: 14, y: 5)
             )
     }
 }
@@ -83,19 +88,19 @@ extension View {
 
 // MARK: - Ambient background
 
-/// Warm ivory backdrop with two faint morning glows for depth.
+/// Near-black backdrop with two faint cool glows for depth.
 struct AmbientBackground: View {
     var body: some View {
         ZStack {
             Palette.bg
 
             RadialGradient(
-                colors: [Color(red: 1.00, green: 0.69, blue: 0.24).opacity(0.16), .clear],
+                colors: [Color(red: 0.45, green: 0.50, blue: 0.62).opacity(0.10), .clear],
                 center: .topLeading, startRadius: 10, endRadius: 500
             )
 
             RadialGradient(
-                colors: [Color(red: 1.00, green: 0.55, blue: 0.45).opacity(0.10), .clear],
+                colors: [Color(red: 0.55, green: 0.55, blue: 0.60).opacity(0.06), .clear],
                 center: .bottomTrailing, startRadius: 10, endRadius: 520
             )
         }
