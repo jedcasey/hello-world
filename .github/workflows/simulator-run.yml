@@ -1,0 +1,86 @@
+name: Simulator run
+
+on:
+  push:
+    branches: [claude/app-overview-vdiytz]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pick and boot a simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available --json | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(dev['udid'] for k,v in d.items() if 'iOS' in k for dev in v if dev['name'].startswith('iPhone')))")
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          xcrun simctl boot "$UDID" || true
+
+      - name: Build for simulator
+        run: |
+          set -o pipefail
+          xcodebuild -project SideQuests.xcodeproj -scheme SideQuests \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -derivedDataPath build CODE_SIGNING_ALLOWED=NO build 2>&1 | tee build.log | tail -60
+
+      - name: Launch app and capture screenshots
+        run: |
+          UDID=${{ steps.sim.outputs.udid }}
+          xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl status_bar "$UDID" override --time "9:41" --batteryLevel 100 --cellularBars 4 --wifiBars 3 || true
+          APP=build/Build/Products/Debug-iphonesimulator/SideQuests.app
+          xcrun simctl install "$UDID" "$APP"
+          mkdir -p shots
+
+          # 1) Fresh launch: onboarding manifesto
+          xcrun simctl launch "$UDID" com.sidequests.SideQuests
+          sleep 14
+          xcrun simctl io "$UDID" screenshot shots/01-onboarding.png
+          xcrun simctl terminate "$UDID" com.sidequests.SideQuests || true
+
+          # 2) Inject an onboarded state (active quests + streak), relaunch: Home
+          python3 - <<'PY'
+          import json, time, binascii
+          ref = time.time() - 978307200  # seconds since 2001-01-01, JSONEncoder default date format
+          day = 86400.0
+          state = {
+            "hasOnboarded": True,
+            "focus": ["physical", "mental", "adventure"],
+            "progress": {
+              "cold-30": {"questID": "cold-30", "startedAt": ref - 12*day,
+                          "logged": [ref - i*day for i in range(11, -1, -1)], "completedAt": None},
+              "read-12": {"questID": "read-12", "startedAt": ref - 40*day,
+                          "logged": [ref - 30*day, ref - 20*day, ref - 10*day, ref - 2*day], "completedAt": None},
+              "silence-day": {"questID": "silence-day", "startedAt": ref - 20*day,
+                              "logged": [ref - 15*day], "completedAt": ref - 15*day},
+            },
+          }
+          open("state.hex", "w").write(binascii.hexlify(json.dumps(state).encode()).decode())
+          PY
+          xcrun simctl spawn "$UDID" defaults write com.sidequests.SideQuests "sidequests.state.v1" -data "$(cat state.hex)"
+          xcrun simctl launch "$UDID" com.sidequests.SideQuests
+          sleep 12
+          xcrun simctl io "$UDID" screenshot shots/02-home.png
+
+      - name: Publish result branch
+        if: always()
+        run: |
+          mkdir -p out
+          cp -R shots/. out/ 2>/dev/null || true
+          [ -f build.log ] && tail -c 250000 build.log > out/build-log-tail.txt
+          echo "run=${{ github.run_number }} status=${{ job.status }}" > out/status.txt
+          cd out
+          git init -q -b sim-result
+          git config user.email "actions@github.com"
+          git config user.name "CI"
+          git add -A
+          git commit -qm "sim result: run ${{ github.run_number }} (${{ job.status }})"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" sim-result
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
