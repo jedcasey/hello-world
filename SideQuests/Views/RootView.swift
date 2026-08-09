@@ -54,7 +54,7 @@ struct RootView: View {
         }
         .animation(.easeOut(duration: 0.3), value: store.celebration?.id)
         .animation(.easeOut(duration: 0.4), value: store.hasOnboarded)
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(.light)
     }
 }
 
@@ -92,7 +92,7 @@ struct TabBar: View {
                     .background {
                         if isSelected {
                             Capsule()
-                                .fill(Color.white.opacity(0.10))
+                                .fill(Palette.fill)
                                 .shadow(color: Palette.gold.opacity(0.25), radius: 12)
                                 .matchedGeometryEffect(id: "pill", in: pill)
                         }
@@ -120,9 +120,9 @@ struct TabBar: View {
                     .allowsHitTesting(false)
             }
         }
-        .overlay(Capsule().strokeBorder(Color.white.opacity(0.09), lineWidth: 1))
+        .overlay(Capsule().strokeBorder(Palette.stroke, lineWidth: 1))
         .clipShape(Capsule())
-        .shadow(color: .black.opacity(0.4), radius: 20, y: 8)
+        .shadow(color: .black.opacity(0.12), radius: 20, y: 8)
     }
 }
 
@@ -138,7 +138,7 @@ struct CelebrationView: View {
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.78).ignoresSafeArea()
+            Color.black.opacity(0.35).ignoresSafeArea()
             ConfettiView().ignoresSafeArea()
 
             TimelineView(.animation(minimumInterval: 1.0 / 60.0)) { timeline in
@@ -189,7 +189,7 @@ struct CelebrationView: View {
                 .foregroundStyle(Palette.gold)
 
             Text(celebration.quest.title)
-                .font(.system(size: 28, weight: .bold, design: .serif))
+                .font(.system(size: 28, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
                 .multilineTextAlignment(.center)
 
@@ -208,7 +208,7 @@ struct CelebrationView: View {
                         .textCase(.uppercase)
                         .foregroundStyle(Palette.textSecondary)
                     Text(newRank.name)
-                        .font(.system(size: 24, weight: .bold, design: .serif))
+                        .font(.system(size: 24, weight: .bold, design: .default))
                         .foregroundStyle(Palette.textPrimary)
                     Text(newRank.motto)
                         .font(.system(size: 13))
@@ -224,7 +224,7 @@ struct CelebrationView: View {
             } label: {
                 Text("Onward")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                     .padding(.horizontal, 44)
                     .padding(.vertical, 15)
                     .background(Capsule().fill(Palette.gold))
@@ -233,6 +233,12 @@ struct CelebrationView: View {
             .padding(.top, 10)
         }
         .padding(32)
+        .background(
+            RoundedRectangle(cornerRadius: 36, style: .continuous)
+                .fill(Palette.bg)
+                .shadow(color: .black.opacity(0.18), radius: 40, y: 16)
+        )
+        .padding(.horizontal, 24)
         .scaleEffect(appeared ? 1 : 0.85)
         .opacity(appeared ? 1 : 0)
     }

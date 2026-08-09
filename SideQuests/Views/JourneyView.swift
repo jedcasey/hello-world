@@ -7,7 +7,7 @@ struct JourneyView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 26) {
                 Text("Your journey")
-                    .font(.system(size: 34, weight: .bold, design: .serif))
+                    .font(.system(size: 34, weight: .bold, design: .default))
                     .foregroundStyle(Palette.textPrimary)
 
                 rankHero.scrollEntrance()
@@ -33,11 +33,11 @@ struct JourneyView: View {
                 .foregroundStyle(Palette.textTertiary)
 
             Text(store.rank.name)
-                .font(.system(size: 40, weight: .bold, design: .serif))
+                .font(.system(size: 40, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
 
             Text("“\(store.rank.motto)”")
-                .font(.system(size: 14, design: .serif))
+                .font(.system(size: 14, design: .default))
                 .italic()
                 .foregroundStyle(Palette.textSecondary)
                 .multilineTextAlignment(.center)
@@ -98,7 +98,7 @@ struct JourneyView: View {
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundStyle(category.accent)
                             .frame(width: 30, height: 30)
-                            .background(RoundedRectangle(cornerRadius: 9, style: .continuous).fill(Color.white.opacity(0.06)))
+                            .background(RoundedRectangle(cornerRadius: 9, style: .continuous).fill(Palette.fill))
 
                         Text(category.title)
                             .font(.system(size: 14, weight: .semibold))
@@ -133,7 +133,7 @@ struct JourneyView: View {
                         .font(.system(size: 26))
                         .foregroundStyle(Palette.textTertiary)
                     Text("Nothing here yet")
-                        .font(.system(size: 16, weight: .bold, design: .serif))
+                        .font(.system(size: 16, weight: .bold, design: .default))
                         .foregroundStyle(Palette.textPrimary)
                     Text("The list of things you're proud of starts with one completed quest.")
                         .font(.system(size: 13))

@@ -9,7 +9,7 @@ struct ExploreView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("The quest board")
-                            .font(.system(size: 34, weight: .bold, design: .serif))
+                            .font(.system(size: 34, weight: .bold, design: .default))
                             .foregroundStyle(Palette.textPrimary)
                         Text("Sixty ways to make life interesting again.")
                             .font(.system(size: 15))
@@ -55,23 +55,23 @@ struct CategoryCard: View {
             HStack {
                 Image(systemName: category.icon)
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Palette.textPrimary)
                     .frame(width: 34, height: 34)
                     .background(Circle().fill(.ultraThinMaterial))
-                    .overlay(Circle().strokeBorder(Color.white.opacity(0.15), lineWidth: 1))
+                    .overlay(Circle().strokeBorder(Palette.stroke, lineWidth: 1))
                 Spacer()
             }
 
             Spacer(minLength: 14)
 
             Text(category.title)
-                .font(.system(size: 20, weight: .bold, design: .serif))
-                .foregroundStyle(.white)
-                .shadow(color: .black.opacity(0.5), radius: 4, y: 1)
+                .font(.system(size: 20, weight: .bold, design: .default))
+                .foregroundStyle(Palette.textPrimary)
+                .shadow(color: Color.white.opacity(0.7), radius: 4, y: 1)
 
             Text("\(done) of \(total) complete")
                 .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(Color.white.opacity(0.75))
+                .foregroundStyle(Palette.textSecondary)
                 .monospacedDigit()
                 .padding(.top, 2)
 
@@ -87,9 +87,9 @@ struct CategoryCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .strokeBorder(Color.white.opacity(0.10), lineWidth: 1)
+                .strokeBorder(Palette.stroke, lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.35), radius: 14, y: 8)
+        .shadow(color: .black.opacity(0.10), radius: 14, y: 8)
     }
 }
 
@@ -154,21 +154,21 @@ struct CategoryDetailView: View {
 
         return VStack(alignment: .leading, spacing: 8) {
             Text(category.title)
-                .font(.system(size: 34, weight: .bold, design: .serif))
-                .foregroundStyle(.white)
-                .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
+                .font(.system(size: 34, weight: .bold, design: .default))
+                .foregroundStyle(Palette.textPrimary)
+                .shadow(color: Color.white.opacity(0.7), radius: 6, y: 2)
 
             Text(category.tagline)
                 .font(.system(size: 15))
-                .foregroundStyle(Color.white.opacity(0.85))
-                .shadow(color: .black.opacity(0.5), radius: 4, y: 1)
+                .foregroundStyle(Palette.textSecondary)
+                .shadow(color: Color.white.opacity(0.6), radius: 4, y: 1)
 
             HStack(spacing: 10) {
                 XPBar(progress: total > 0 ? Double(done) / Double(total) : 0,
                       colors: category.gradientColors, height: 6)
                 Text("\(done)/\(total)")
                     .font(.system(size: 13, weight: .bold))
-                    .foregroundStyle(Color.white.opacity(0.85))
+                    .foregroundStyle(Palette.textSecondary)
                     .monospacedDigit()
             }
             .padding(.top, 4)
@@ -236,7 +236,7 @@ struct QuestRow: View {
         switch state {
         case .available:
             Circle()
-                .strokeBorder(Color.white.opacity(0.18), lineWidth: 1.8)
+                .strokeBorder(Palette.fillStrong, lineWidth: 1.8)
                 .frame(width: 30, height: 30)
         case .active:
             let p = store.progress(of: quest)

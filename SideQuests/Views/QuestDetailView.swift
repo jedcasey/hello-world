@@ -87,7 +87,7 @@ struct QuestDetailView: View {
                 .foregroundStyle(quest.category.accent)
 
             Text(quest.title)
-                .font(.system(size: 28, weight: .bold, design: .serif))
+                .font(.system(size: 28, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)

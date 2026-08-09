@@ -41,8 +41,9 @@ static float fbm(float2 p) {
 }
 
 // MARK: - Aurora
-// Slow-drifting nebula field over near-black: violet, ember and a whisper of teal.
-// Applied as a colorEffect on a full-screen rectangle.
+// Daybreak: slow-drifting morning light over warm ivory — amber sun, a blush
+// of rose, and a whisper of airy violet. Applied as a colorEffect on a
+// full-screen rectangle.
 
 [[ stitchable ]] half4 aurora(float2 position, half4 color, float2 size, float time) {
     float2 uv = position / max(size.x, size.y);
@@ -52,14 +53,14 @@ static float fbm(float2 p) {
     float n2 = fbm(uv * 2.6 + float2(-t * 0.8, t * 0.5) + 4.7);
     float n3 = fbm(uv * 2.2 - t);
 
-    half3 c = half3(0.016h, 0.018h, 0.024h);
-    c += half3(0.16h, 0.10h, 0.38h) * half(smoothstep(0.55, 0.95, n1)) * 0.50h;
-    c += half3(0.42h, 0.16h, 0.05h) * half(smoothstep(0.60, 1.00, n2)) * 0.40h;
-    c += half3(0.05h, 0.22h, 0.18h) * half(smoothstep(0.70, 1.05, n3)) * 0.22h;
+    half3 c = half3(0.984h, 0.978h, 0.960h);
+    c = mix(c, half3(1.00h, 0.85h, 0.62h), half(smoothstep(0.55, 0.95, n1)) * 0.30h);
+    c = mix(c, half3(1.00h, 0.80h, 0.76h), half(smoothstep(0.60, 1.00, n2)) * 0.18h);
+    c = mix(c, half3(0.88h, 0.88h, 1.00h), half(smoothstep(0.70, 1.05, n3)) * 0.12h);
 
-    // Gentle vignette so edges settle into black.
+    // Gentle vignette so edges settle into deeper cream.
     float2 centered = position / size - 0.5;
-    c *= half(1.0 - dot(centered, centered) * 0.9);
+    c *= half(1.0 - dot(centered, centered) * 0.10);
 
     return half4(c, color.a);
 }

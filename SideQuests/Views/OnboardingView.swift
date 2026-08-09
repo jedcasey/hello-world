@@ -56,11 +56,11 @@ struct OnboardingView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
                 .overlay(
                     RoundedRectangle(cornerRadius: 28, style: .continuous)
-                        .strokeBorder(Color.white.opacity(0.09), lineWidth: 1)
+                        .strokeBorder(Palette.stroke, lineWidth: 1)
                 )
 
                 Text("Most men are waiting for life to become interesting.")
-                    .font(.system(size: 34, weight: .bold, design: .serif))
+                    .font(.system(size: 34, weight: .bold, design: .default))
                     .foregroundStyle(Palette.textPrimary)
                     .fixedSize(horizontal: false, vertical: true)
 
@@ -80,7 +80,7 @@ struct OnboardingView: View {
     private var howItWorks: some View {
         VStack(alignment: .leading, spacing: 28) {
             Text("How it works")
-                .font(.system(size: 32, weight: .bold, design: .serif))
+                .font(.system(size: 32, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
 
             explainRow(icon: "scroll.fill", tint: QuestCategory.adventure.accent,
@@ -105,7 +105,7 @@ struct OnboardingView: View {
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundStyle(tint)
                 .frame(width: 48, height: 48)
-                .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(Color.white.opacity(0.06)))
+                .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(Palette.fill))
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
@@ -125,7 +125,7 @@ struct OnboardingView: View {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Where do you want to grow?")
-                        .font(.system(size: 30, weight: .bold, design: .serif))
+                        .font(.system(size: 30, weight: .bold, design: .default))
                         .foregroundStyle(Palette.textPrimary)
                         .fixedSize(horizontal: false, vertical: true)
                     Text("Pick at least one arena. You can explore all of them anytime.")
@@ -190,7 +190,7 @@ struct OnboardingView: View {
         HStack(spacing: 7) {
             ForEach(0..<3, id: \.self) { i in
                 Capsule()
-                    .fill(i == page ? Palette.gold : Color.white.opacity(0.15))
+                    .fill(i == page ? Palette.gold : Palette.fillStrong)
                     .frame(width: i == page ? 22 : 7, height: 7)
                     .animation(Motion.snappy, value: page)
             }
@@ -202,7 +202,7 @@ struct OnboardingView: View {
         let title = page == 0 ? "I'm ready" : (isLast ? "Begin my journey" : "Continue")
         return PrimaryButton(
             title: title,
-            colors: [Palette.gold, Color(red: 0.87, green: 0.49, blue: 0.16)],
+            colors: [Palette.gold, Palette.goldDeep],
             icon: isLast ? "arrow.right" : nil,
             disabled: isLast && selected.isEmpty
         ) {

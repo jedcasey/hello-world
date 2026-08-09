@@ -10,7 +10,7 @@ struct ProgressRing: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.white.opacity(0.08), lineWidth: lineWidth)
+                .stroke(Palette.fillStrong, lineWidth: lineWidth)
             Circle()
                 .trim(from: 0, to: max(0.001, min(1, progress)))
                 .stroke(
@@ -27,13 +27,13 @@ struct ProgressRing: View {
 
 struct XPBar: View {
     var progress: Double
-    var colors: [Color] = [Palette.gold, Color(red: 0.87, green: 0.49, blue: 0.16)]
+    var colors: [Color] = [Palette.gold, Palette.goldDeep]
     var height: CGFloat = 8
 
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .leading) {
-                Capsule().fill(Color.white.opacity(0.08))
+                Capsule().fill(Palette.fillStrong)
                 Capsule()
                     .fill(LinearGradient(colors: colors, startPoint: .leading, endPoint: .trailing))
                     .frame(width: max(height, geo.size.width * min(1, max(0, progress))))
@@ -63,8 +63,8 @@ struct Chip: View {
         .foregroundStyle(tint)
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
-        .background(Capsule().fill(Color.white.opacity(0.06)))
-        .overlay(Capsule().strokeBorder(Color.white.opacity(0.08), lineWidth: 1))
+        .background(Capsule().fill(Palette.fill))
+        .overlay(Capsule().strokeBorder(Palette.stroke, lineWidth: 1))
     }
 }
 
@@ -101,7 +101,7 @@ struct TierDots: View {
         HStack(spacing: 3) {
             ForEach(1...3, id: \.self) { i in
                 Circle()
-                    .fill(i <= difficulty.rawValue ? tint : Color.white.opacity(0.14))
+                    .fill(i <= difficulty.rawValue ? tint : Palette.fillStrong)
                     .frame(width: 5, height: 5)
             }
         }
@@ -123,7 +123,7 @@ struct ConfettiView: View {
 
         init(index: Int) {
             var rng = SeededRNG(seed: UInt64(index &+ 1))
-            let palette: [Color] = QuestCategory.allCases.flatMap { $0.gradientColors } + [Palette.gold, .white]
+            let palette: [Color] = QuestCategory.allCases.flatMap { $0.gradientColors } + [Palette.gold, Palette.goldDeep]
             x0    = Double.random(in: 0...1, using: &rng)
             delay = Double.random(in: 0...1.2, using: &rng)
             speed = Double.random(in: 0.25...0.55, using: &rng)
@@ -188,7 +188,7 @@ struct PrimaryButton: View {
                 Group {
                     if disabled {
                         RoundedRectangle(cornerRadius: 18, style: .continuous)
-                            .fill(Color.white.opacity(0.06))
+                            .fill(Palette.fill)
                     } else {
                         RoundedRectangle(cornerRadius: 18, style: .continuous)
                             .fill(LinearGradient(colors: colors, startPoint: .topLeading, endPoint: .bottomTrailing))

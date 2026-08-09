@@ -50,7 +50,7 @@ struct HomeView: View {
                 .foregroundStyle(Palette.textTertiary)
 
             Text(greeting)
-                .font(.system(size: 38, weight: .bold, design: .serif))
+                .font(.system(size: 38, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
 
             Text("The day is a quest board. Take something from it.")
@@ -68,11 +68,11 @@ struct HomeView: View {
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundStyle(Palette.gold)
                     .frame(width: 48, height: 48)
-                    .background(Circle().fill(Color.white.opacity(0.06)))
+                    .background(Circle().fill(Palette.accentSoft))
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(store.rank.name)
-                        .font(.system(size: 20, weight: .bold, design: .serif))
+                        .font(.system(size: 20, weight: .bold, design: .default))
                         .foregroundStyle(Palette.textPrimary)
                     if let next = store.nextRank {
                         Text("\(store.totalXP.formatted()) / \(next.xpRequired.formatted()) XP to \(next.name)")
@@ -102,7 +102,7 @@ struct HomeView: View {
                             .contentTransition(.numericText(value: Double(store.streak)))
                     }
                     .frame(width: 46, height: 46)
-                    .background(Circle().fill(Color.white.opacity(0.06)))
+                    .background(Circle().fill(Palette.accentSoft))
                 }
             }
 
@@ -133,7 +133,7 @@ struct HomeView: View {
     private var emptyState: some View {
         VStack(alignment: .leading, spacing: 14) {
             Text("No active quests")
-                .font(.system(size: 22, weight: .bold, design: .serif))
+                .font(.system(size: 22, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
 
             Text("Boredom is a choice. Pick one thing this week that your future self will thank you for.")
@@ -143,7 +143,7 @@ struct HomeView: View {
 
             PrimaryButton(
                 title: "Browse the quest board",
-                colors: [Palette.gold, Color(red: 0.87, green: 0.49, blue: 0.16)],
+                colors: [Palette.gold, Palette.goldDeep],
                 icon: "map.fill"
             ) {
                 withAnimation(Motion.bouncy) {
@@ -268,7 +268,7 @@ struct ActiveQuestCard: View {
                     Circle().fill(
                         canLog
                             ? AnyShapeStyle(quest.category.gradient)
-                            : AnyShapeStyle(Color.white.opacity(0.07))
+                            : AnyShapeStyle(Palette.fillStrong)
                     )
                 )
         }
