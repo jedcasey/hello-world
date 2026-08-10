@@ -1,0 +1,352 @@
+Command line invocation:
+    /Applications/Xcode_16.4.app/Contents/Developer/usr/bin/xcodebuild -project SideQuests.xcodeproj -scheme SideQuests -destination id=9E2C2CF0-7DD4-4B9D-B6CE-63C9E42B95A7 -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+
+Build settings from command line:
+    CODE_SIGNING_ALLOWED = NO
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:9E2C2CF0-7DD4-4B9D-B6CE-63C9E42B95A7, OS:18.5, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:9E2C2CF0-7DD4-4B9D-B6CE-63C9E42B95A7, OS:18.5, name:iPhone 16 Pro }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'SideQuests' in project 'SideQuests' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode_16.4.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/runner/work/hello-world/hello-world/SideQuests/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_16.4.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 628b5a903bd358fe242ebdd4f4b2ab52
+Build description path: /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/XCBuildData/628b5a903bd358fe242ebdd4f4b2ab52.xcbuilddata
+CreateBuildDirectory /Users/runner/work/hello-world/hello-world/build/Build/Products
+    cd /Users/runner/work/hello-world/hello-world/SideQuests.xcodeproj
+    builtin-create-build-directory /Users/runner/work/hello-world/hello-world/build/Build/Products
+
+CreateBuildDirectory /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex
+    cd /Users/runner/work/hello-world/hello-world/SideQuests.xcodeproj
+    builtin-create-build-directory /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex
+
+ClangStatCache /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk /Users/runner/work/hello-world/hello-world/build/SDKStatCaches.noindex/iphonesimulator18.5-22F76-96ae0914227b19deccb34b33ba7b5dea.sdkstatcache
+    cd /Users/runner/work/hello-world/hello-world/SideQuests.xcodeproj
+    /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -o /Users/runner/work/hello-world/hello-world/build/SDKStatCaches.noindex/iphonesimulator18.5-22F76-96ae0914227b19deccb34b33ba7b5dea.sdkstatcache
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests-6a91c3ac3e88e5b6958c1349f8deabab-VFS-iphonesimulator/all-product-headers.yaml
+    cd /Users/runner/work/hello-world/hello-world/SideQuests.xcodeproj
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests-6a91c3ac3e88e5b6958c1349f8deabab-VFS-iphonesimulator/all-product-headers.yaml
+
+CreateBuildDirectory /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator
+    cd /Users/runner/work/hello-world/hello-world/SideQuests.xcodeproj
+    builtin-create-build-directory /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator
+
+CreateBuildDirectory /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+    cd /Users/runner/work/hello-world/hello-world/SideQuests.xcodeproj
+    builtin-create-build-directory /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/empty-SideQuests.plist (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/empty-SideQuests.plist
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.hmap (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.hmap
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.DependencyStaticMetadataFileList (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.DependencyMetadataFileList (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-project-headers.hmap (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-project-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-own-target-headers.hmap (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-generated-files.hmap (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-generated-files.hmap
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-all-target-headers.hmap (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-all-non-framework-target-headers.hmap (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-DebugDylibPath-normal-arm64.txt (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-DebugDylibInstallName-normal-arm64.txt (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-DebugDylibInstallName-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_const_extract_protocols.json (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftFileList (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftConstValuesFileList (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.LinkFileList (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-OutputFileMap.json (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    write-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-OutputFileMap.json
+
+MkDir /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /bin/mkdir -p /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app
+
+Ld /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/__preview.dylib normal (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -dynamiclib -isysroot /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -O0 -L/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -F/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -install_name @rpath/SideQuests.debug.dylib -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_dependency_info.dat -o /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/__preview.dylib
+
+MkDir /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/unthinned (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /bin/mkdir -p /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/unthinned
+
+MkDir /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/thinned (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /bin/mkdir -p /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/thinned
+
+GenerateAssetSymbols /Users/runner/work/hello-world/hello-world/SideQuests/Assets.xcassets (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/usr/bin/actool /Users/runner/work/hello-world/hello-world/SideQuests/Assets.xcassets --compile /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app --output-format human-readable-text --notices --warnings --export-dependency-info /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_dependencies --output-partial-info-plist /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_generated_info.plist --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --development-region en --target-device iphone --minimum-deployment-target 17.0 --platform iphonesimulator --bundle-identifier com.sidequests.SideQuests --generate-swift-asset-symbols /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.compilation-results */
+/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+CompileMetalFile /Users/runner/work/hello-world/hello-world/SideQuests/Shaders/Shaders.metal (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/metal -c -target air64-apple-ios17.0-simulator -gline-tables-only -frecord-sources -I/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/include -F/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -isysroot /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -fmetal-math-mode\=fast -fmetal-math-fp32-functions\=fast -serialize-diagnostics /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Metal/Shaders.dia -o /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Metal/Shaders.air -index-store-path /Users/runner/work/hello-world/hello-world/build/Index.noindex/DataStore -MMD -MT dependencies -MF /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Metal/Shaders.dat /Users/runner/work/hello-world/hello-world/SideQuests/Shaders/Shaders.metal
+
+CompileAssetCatalogVariant thinned /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app /Users/runner/work/hello-world/hello-world/SideQuests/Assets.xcassets (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/usr/bin/actool /Users/runner/work/hello-world/hello-world/SideQuests/Assets.xcassets --compile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_generated_info.plist_thinned --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --filter-for-thinning-device-configuration iPhone17,1 --filter-for-device-os-version 18.5 --development-region en --target-device iphone --minimum-deployment-target 17.0 --platform iphonesimulator
+/* com.apple.actool.compilation-results */
+/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_generated_info.plist_thinned
+/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/thinned/AppIcon60x60@2x.png
+/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/thinned/AppIcon76x76@2x~ipad.png
+/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/thinned/Assets.car
+
+
+MetalLink /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/default.metallib (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/metal -target air64-apple-ios17.0-simulator -frecord-sources -o /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/default.metallib /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Metal/Shaders.air
+
+SwiftDriver SideQuests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-SwiftDriver -- /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name SideQuests -Onone -enforce-exclusivity\=checked @/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/runner/work/hello-world/hello-world/build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/runner/work/hello-world/hello-world/build/Index.noindex/DataStore -swift-version 5 -I /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -F /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/runner/work/hello-world/hello-world/build/SDKStatCaches.noindex/iphonesimulator18.5-22F76-96ae0914227b19deccb34b33ba7b5dea.sdkstatcache -output-file-map /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/runner/work/hello-world/hello-world/build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-generated-files.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-own-target-headers.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-project-headers.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-Swift.h -working-directory /Users/runner/work/hello-world/hello-world -experimental-emit-module-separately -disable-cmo
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ SideQuests (in target 'SideQuests' from project 'SideQuests')
+EmitSwiftModule normal arm64 (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 Compiling\ RootView.swift,\ SideQuestsApp.swift,\ ArenaImage.swift,\ Models.swift,\ AuroraBackground.swift,\ QuestLibrary.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/RootView.swift /Users/runner/work/hello-world/hello-world/SideQuests/SideQuestsApp.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/Effects/ArenaImage.swift /Users/runner/work/hello-world/hello-world/SideQuests/Models/Models.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/Effects/AuroraBackground.swift /Users/runner/work/hello-world/hello-world/SideQuests/Models/QuestLibrary.swift (in target 'SideQuests' from project 'SideQuests')
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/RootView.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/SideQuestsApp.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/Effects/ArenaImage.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Models/Models.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/Effects/AuroraBackground.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Models/QuestLibrary.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 Compiling\ PopBurst.swift,\ QuestStore.swift,\ StreamedText.swift,\ Components.swift,\ ExploreView.swift,\ GeneratedAssetSymbols.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/Effects/PopBurst.swift /Users/runner/work/hello-world/hello-world/SideQuests/Models/QuestStore.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/Effects/StreamedText.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/Components.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/ExploreView.swift /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'SideQuests' from project 'SideQuests')
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/Effects/PopBurst.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Models/QuestStore.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/Effects/StreamedText.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/Components.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/ExploreView.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+LinkAssetCatalog /Users/runner/work/hello-world/hello-world/SideQuests/Assets.xcassets (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-linkAssetCatalog --thinned /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/thinned --thinned-dependencies /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_generated_info.plist_unthinned --output /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app --plist-output /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_generated_info.plist
+note: Emplaced /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/AppIcon60x60@2x.png (in target 'SideQuests' from project 'SideQuests')
+note: Emplaced /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/Assets.car (in target 'SideQuests' from project 'SideQuests')
+note: Emplaced /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/AppIcon76x76@2x~ipad.png (in target 'SideQuests' from project 'SideQuests')
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for SideQuests (in target 'SideQuests' from project 'SideQuests')
+
+SwiftDriver\ Compilation\ Requirements SideQuests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name SideQuests -Onone -enforce-exclusivity\=checked @/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/runner/work/hello-world/hello-world/build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/runner/work/hello-world/hello-world/build/Index.noindex/DataStore -swift-version 5 -I /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -F /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/runner/work/hello-world/hello-world/build/SDKStatCaches.noindex/iphonesimulator18.5-22F76-96ae0914227b19deccb34b33ba7b5dea.sdkstatcache -output-file-map /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/runner/work/hello-world/hello-world/build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-generated-files.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-own-target-headers.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-project-headers.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-Swift.h -working-directory /Users/runner/work/hello-world/hello-world -experimental-emit-module-separately -disable-cmo
+
+ProcessInfoPlistFile /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/Info.plist /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/empty-SideQuests.plist (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-infoPlistUtility /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/empty-SideQuests.plist -producttype com.apple.product-type.application -genpkginfo /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/assetcatalog_generated_info.plist -o /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/Info.plist
+
+SwiftMergeGeneratedHeaders /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/SideQuests-Swift.h /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-Swift.h (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-swiftHeaderTool -arch arm64 /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-Swift.h -o /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/SideQuests-Swift.h
+
+Copy /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftmodule (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftmodule /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+Copy /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftdoc (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftdoc /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.swiftmodule/arm64-apple-ios-simulator.swiftdoc
+
+Copy /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.abi.json (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.abi.json /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftsourceinfo (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftsourceinfo /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+SwiftCompile normal arm64 Compiling\ HomeView.swift,\ HapticsEngine.swift,\ JourneyView.swift,\ Motion.swift,\ OnboardingView.swift,\ Theme.swift,\ QuestDetailView.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/HomeView.swift /Users/runner/work/hello-world/hello-world/SideQuests/Theme/HapticsEngine.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/JourneyView.swift /Users/runner/work/hello-world/hello-world/SideQuests/Theme/Motion.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/OnboardingView.swift /Users/runner/work/hello-world/hello-world/SideQuests/Theme/Theme.swift /Users/runner/work/hello-world/hello-world/SideQuests/Views/QuestDetailView.swift (in target 'SideQuests' from project 'SideQuests')
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/HomeView.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Theme/HapticsEngine.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/JourneyView.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Theme/Motion.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/OnboardingView.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Theme/Theme.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftCompile normal arm64 /Users/runner/work/hello-world/hello-world/SideQuests/Views/QuestDetailView.swift (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling HomeView.swift, HapticsEngine.swift, JourneyView.swift, Motion.swift, OnboardingView.swift, Theme.swift, QuestDetailView.swift (in target 'SideQuests' from project 'SideQuests')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PopBurst.swift, QuestStore.swift, StreamedText.swift, Components.swift, ExploreView.swift, GeneratedAssetSymbols.swift (in target 'SideQuests' from project 'SideQuests')
+
+SwiftDriverJobDiscovery normal arm64 Compiling RootView.swift, SideQuestsApp.swift, ArenaImage.swift, Models.swift, AuroraBackground.swift, QuestLibrary.swift (in target 'SideQuests' from project 'SideQuests')
+
+SwiftDriver\ Compilation SideQuests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-Swift-Compilation -- /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name SideQuests -Onone -enforce-exclusivity\=checked @/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/runner/work/hello-world/hello-world/build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/runner/work/hello-world/hello-world/build/Index.noindex/DataStore -swift-version 5 -I /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -F /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/runner/work/hello-world/hello-world/build/SDKStatCaches.noindex/iphonesimulator18.5-22F76-96ae0914227b19deccb34b33ba7b5dea.sdkstatcache -output-file-map /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/runner/work/hello-world/hello-world/build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-generated-files.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-own-target-headers.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-project-headers.hmap -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests-Swift.h -working-directory /Users/runner/work/hello-world/hello-world -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SideQuests.debug.dylib normal (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -dynamiclib -isysroot /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -O0 -L/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -F/Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -filelist /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.LinkFileList -install_name @rpath/SideQuests.debug.dylib -Xlinker -rpath -Xlinker @executable_path/Frameworks -dead_strip -Xlinker -object_path_lto -Xlinker /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.swiftmodule -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -o /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SideQuests.debug.dylib
+
+ConstructStubExecutorLinkFileList /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-ExecutorLinkFileList-normal-arm64.txt (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    construct-stub-executor-link-file-list /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SideQuests.debug.dylib /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'SideQuests' from project 'SideQuests')
+
+Ld /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SideQuests normal (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -isysroot /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -O0 -L/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -F/Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests-ExecutorLinkFileList-normal-arm64.txt /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SideQuests.debug.dylib -o /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SideQuests
+
+CopySwiftLibs /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SideQuests.debug.dylib --scan-folder /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/Frameworks --scan-folder /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/PlugIns --scan-folder /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SystemExtensions --scan-folder /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/Extensions --platform iphonesimulator --toolchain /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+Ignoring --strip-bitcode because --sign was not passed
+
+ExtractAppIntentsMetadata (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name SideQuests --sdk-root /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk --xcode-version 16F6 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.sidequests.SideQuests --output /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app --target-triple arm64-apple-ios17.0-simulator --binary-file /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/SideQuests --dependency-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests_dependency_info.dat --stringsdata-file /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftFileList --metadata-file-list /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.DependencyMetadataFileList --static-metadata-file-list /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.DependencyStaticMetadataFileList --swift-const-vals-list /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/Objects-normal/arm64/SideQuests.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-08-10 06:06:58.440 appintentsmetadataprocessor[10713:34663] Starting appintentsmetadataprocessor export
+2026-08-10 06:06:58.450 appintentsmetadataprocessor[10713:34663] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+AppIntentsSSUTraining (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/Info.plist --temp-dir-path /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/ssu --bundle-id com.sidequests.SideQuests --product-path /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app --extracted-metadata-path /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app/Metadata.appintents --metadata-file-list /Users/runner/work/hello-world/hello-world/build/Build/Intermediates.noindex/SideQuests.build/Debug-iphonesimulator/SideQuests.build/SideQuests.DependencyMetadataFileList --archive-ssu-assets
+2026-08-10 06:06:58.554 appintentsnltrainingprocessor[10769:34788] Parsing options for appintentsnltrainingprocessor
+2026-08-10 06:06:58.556 appintentsnltrainingprocessor[10769:34788] No AppShortcuts found - Skipping.
+
+RegisterExecutionPolicyException /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-RegisterExecutionPolicyException /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app
+
+Validate /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    builtin-validationUtility /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app -infoplist-subpath Info.plist
+
+Touch /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app (in target 'SideQuests' from project 'SideQuests')
+    cd /Users/runner/work/hello-world/hello-world
+    /usr/bin/touch -c /Users/runner/work/hello-world/hello-world/build/Build/Products/Debug-iphonesimulator/SideQuests.app
+
+** BUILD SUCCEEDED **
+
