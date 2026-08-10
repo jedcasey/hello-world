@@ -41,26 +41,35 @@ static float fbm(float2 p) {
 }
 
 // MARK: - Aurora
-// Nightfall: slow-drifting smoke and cloud over near-black — charcoal greys
-// with the faintest cool blue, like storm clouds at altitude. Applied as a
-// colorEffect on a full-screen rectangle.
+// Ascent: the same slow drift, two moods. Dark mode is a deep indigo night
+// with luminous amber / violet / teal glows; light mode is warm morning
+// paper washed with peach and honey. `dark` is 1 in dark mode, 0 in light.
 
-[[ stitchable ]] half4 aurora(float2 position, half4 color, float2 size, float time) {
+[[ stitchable ]] half4 aurora(float2 position, half4 color, float2 size, float time, float dark) {
     float2 uv = position / max(size.x, size.y);
     float t = time * 0.03;
 
-    float n1 = fbm(uv * 1.8 + float2(t, -t * 0.6));
-    float n2 = fbm(uv * 2.6 + float2(-t * 0.8, t * 0.5) + 4.7);
-    float n3 = fbm(uv * 2.2 - t);
+    float n1 = smoothstep(0.55, 0.95, fbm(uv * 1.8 + float2(t, -t * 0.6)));
+    float n2 = smoothstep(0.60, 1.00, fbm(uv * 2.6 + float2(-t * 0.8, t * 0.5) + 4.7));
+    float n3 = smoothstep(0.62, 1.02, fbm(uv * 2.2 - t));
 
-    half3 c = half3(0.022h, 0.023h, 0.028h);
-    c += half3(0.10h, 0.11h, 0.14h) * half(smoothstep(0.55, 0.95, n1)) * 0.45h;
-    c += half3(0.13h, 0.13h, 0.15h) * half(smoothstep(0.60, 1.00, n2)) * 0.30h;
-    c += half3(0.06h, 0.08h, 0.13h) * half(smoothstep(0.70, 1.05, n3)) * 0.28h;
+    // Night: indigo ground, glows that feel alive rather than gloomy.
+    half3 night = half3(0.051h, 0.067h, 0.125h);
+    night += half3(0.42h, 0.28h, 0.10h) * half(n1) * 0.30h;   // sunrise amber
+    night += half3(0.22h, 0.18h, 0.46h) * half(n2) * 0.34h;   // violet
+    night += half3(0.06h, 0.26h, 0.26h) * half(n3) * 0.22h;   // teal
 
-    // Gentle vignette so edges settle into black.
+    // Day: cream ground, soft peach and honey washes.
+    half3 day = half3(0.980h, 0.969h, 0.945h);
+    day = mix(day, half3(1.00h, 0.86h, 0.66h), half(n1) * 0.34h);
+    day = mix(day, half3(1.00h, 0.78h, 0.58h), half(n2) * 0.18h);
+    day = mix(day, half3(0.99h, 0.93h, 0.80h), half(n3) * 0.22h);
+
+    half3 c = mix(day, night, half(dark));
+
+    // Gentle vignette; settles edges without deadening the light mode.
     float2 centered = position / size - 0.5;
-    c *= half(1.0 - dot(centered, centered) * 0.9);
+    c *= half(1.0 - dot(centered, centered) * (0.55 * dark + 0.08));
 
     return half4(c, color.a);
 }

@@ -1,37 +1,43 @@
-# Side Quests — Design Language (Nightfall)
+# Side Quests — Design Language (Ascent)
 
-The app should feel like a quiet instrument: near-black, typographic,
-unhurried. Hierarchy comes from steps of white and from spacing, never
-from decoration; the dark photography carries the mood. Every choice
-below serves that.
+One brand, two moods. By day the app is warm morning paper — cream,
+peach light, soft shadows. By night it is a luminous indigo sky that
+glows rather than broods (Oura, not a cave). Both moods share the same
+sunrise-amber accent and the same vivid arena tones, so the app feels
+like itself at any hour. Dark mode is never an inversion; it is the same
+sunrise seen from the other side.
 
 ## Foundations
 
-| Element | Choice | Why |
-| --- | --- | --- |
-| Ground | Near-black `#060607` with a living smoke shader | Depth without decoration; the app breathes |
-| Display type | SF Pro (`.default`), bold, tight tracking | Typography does the work |
-| Body type | SF Pro, 13–17pt | Quiet, legible counterpoint |
-| Numbers | Rounded + monospaced digits | Precision without layout jitter |
-| Chrome | 4% white fills, 8% white hairlines, flat (no shadows) | Rows, not boxes |
-| Champagne `#EBE1CC` | Reserved for XP, rank, and reward moments | Barely a color; scarcity keeps it meaningful |
+| Element | Light | Dark | Why |
+| --- | --- | --- | --- |
+| Ground | Warm cream `#FAF7F1` | Indigo-navy `#0D1120` | Morning paper / luminous night |
+| Elevated | White cards, soft warm shadow | 5–10% white over indigo, glow shadows | Paper over paper / light over sky |
+| Text | Warm near-black steps | Warm off-white steps | Hierarchy in steps of one tone |
+| Accent | Burnt amber `#DE7D21` | Sunrise gold `#F7B859` | Deeper for contrast on cream; luminous on indigo |
+| Display type | SF Pro (`.default`), bold, tight tracking | same | Typography does the work |
+| Numbers | Rounded + monospaced digits | same | Precision without layout jitter |
+
+The accent is reserved for XP, ranks, and reward moments — scarcity
+keeps it meaningful. Chrome is hairlines and gentle fills, never boxes.
 
 ## Arena system
 
-Each of the six arenas owns a two-stop dusty gradient and one night
-photograph (generated with Nano Banana 2, single locked prompt template:
-subject emerging from deep darkness, one faint cold light, black negative
-space, near-monochrome charcoal palette, 35mm grain).
-The gradient colors every ring, bar, icon, and button for that arena's
-quests; the photograph carries the card, the arena hero, and the quest
-sheet backdrop. Film grain (shader) unifies photograph and UI.
+Each of the six arenas owns a two-stop vivid gradient and one
+golden-hour photograph (generated with Nano Banana 2, single locked
+prompt template: an aspirational moment mid-effort, warm low sun,
+amber-and-honey palette, real place, no faces readable, 35mm grain).
+The gradient colors every ring, bar, and button for that arena's
+quests; the photograph IS the arena's identity — circular `ArenaThumb`
+medallions and rounded `ArenaTile` squares replace symbol-in-a-circle
+iconography everywhere. Film grain (shader) unifies photograph and UI.
 
-- Physical — ember `#FF7038 → #E13042` — kettlebell and chalk dust
-- Mental — indigo `#807AFF → #4D3DDB` — marble knight on old books
-- Financial — gold `#FAC24D → #DB8721` — stacked antique coins
-- Social — rose `#FF7590 → #D63873` — two glasses mid-toast
-- Adventure — emerald `#38D99C → #1A9680` — brass compass on leather
-- Creative — violet `#C773FF → #8245E6` — brush lifting molten gold
+- Physical — flame `#FF734D → #E34047` — trail runner on a sunrise ridge
+- Mental — indigo `#8778FA → #5E4FDB` — open book in morning sunbeams
+- Financial — amber `#FAA838 → #DE7A1C` — seedling growing from a coin jar
+- Social — rose `#FA7094 → #D94275` — campfire toast at dusk
+- Adventure — emerald `#29BF8C → #0D8C75` — arms raised above a sea of clouds
+- Creative — violet `#B870F5 → #8C4ACF` — hands at a potter's wheel in morning light
 
 ## Motion vocabulary
 
@@ -42,8 +48,9 @@ rest of the app doesn't use.
 
 Signature moves:
 
-- **Aurora** — full-screen fbm shader drifting at 24fps; charcoal smoke
-  and a whisper of cool blue breathing through near-black.
+- **Aurora** — full-screen fbm shader drifting at 24fps, scheme-aware:
+  amber/violet/teal glows breathing through indigo by night; peach and
+  honey washes over cream by day.
 - **Shimmer** — a specular band sweeps gold surfaces every 3.6s.
 - **Glass sheen** — the tab bar is material + a shader that plays a bright
   top edge and a slow drifting highlight across it, like light on curved glass.

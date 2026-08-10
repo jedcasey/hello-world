@@ -52,22 +52,12 @@ struct CategoryCard: View {
         let done = store.completedCount(in: category)
 
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Image(systemName: category.icon)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(Palette.textPrimary)
-                    .frame(width: 34, height: 34)
-                    .background(Circle().fill(.ultraThinMaterial))
-                    .overlay(Circle().strokeBorder(Palette.stroke, lineWidth: 1))
-                Spacer()
-            }
-
             Spacer(minLength: 14)
 
             Text(category.title)
                 .font(.system(size: 20, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
-                .shadow(color: .black.opacity(0.55), radius: 4, y: 1)
+                .shadow(color: Palette.bg.opacity(0.7), radius: 4, y: 1)
 
             Text("\(done) of \(total) complete")
                 .font(.system(size: 12, weight: .medium))
@@ -89,7 +79,7 @@ struct CategoryCard: View {
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .strokeBorder(Palette.stroke, lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.40), radius: 14, y: 8)
+        .shadow(color: .black.opacity(0.22), radius: 14, y: 8)
     }
 }
 
@@ -156,12 +146,12 @@ struct CategoryDetailView: View {
             Text(category.title)
                 .font(.system(size: 34, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
-                .shadow(color: .black.opacity(0.55), radius: 6, y: 2)
+                .shadow(color: Palette.bg.opacity(0.7), radius: 6, y: 2)
 
             Text(category.tagline)
                 .font(.system(size: 15))
                 .foregroundStyle(Palette.textSecondary)
-                .shadow(color: .black.opacity(0.5), radius: 4, y: 1)
+                .shadow(color: Palette.bg.opacity(0.6), radius: 4, y: 1)
 
             HStack(spacing: 10) {
                 XPBar(progress: total > 0 ? Double(done) / Double(total) : 0,

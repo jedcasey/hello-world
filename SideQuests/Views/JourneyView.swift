@@ -94,11 +94,7 @@ struct JourneyView: View {
                     let done = store.completedCount(in: category)
 
                     HStack(spacing: 12) {
-                        Image(systemName: category.icon)
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(category.accent)
-                            .frame(width: 30, height: 30)
-                            .background(RoundedRectangle(cornerRadius: 9, style: .continuous).fill(Palette.fill))
+                        ArenaTile(category: category, size: 30, radius: 9)
 
                         Text(category.title)
                             .font(.system(size: 14, weight: .semibold))

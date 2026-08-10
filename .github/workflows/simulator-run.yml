@@ -38,10 +38,11 @@ jobs:
           xcrun simctl install "$UDID" "$APP"
           mkdir -p shots
 
-          # 1) Fresh launch: onboarding manifesto
+          # 1) Fresh launch in light mode: onboarding manifesto
+          xcrun simctl ui "$UDID" appearance light || true
           xcrun simctl launch "$UDID" com.sidequests.SideQuests
           sleep 14
-          xcrun simctl io "$UDID" screenshot shots/01-onboarding.png
+          xcrun simctl io "$UDID" screenshot shots/01-onboarding-light.png
           xcrun simctl terminate "$UDID" com.sidequests.SideQuests || true
 
           # 2) Inject an onboarded state (active quests + streak), relaunch: Home
@@ -66,7 +67,19 @@ jobs:
           xcrun simctl spawn "$UDID" defaults write com.sidequests.SideQuests "sidequests.state.v1" -data "$(cat state.hex)"
           xcrun simctl launch "$UDID" com.sidequests.SideQuests
           sleep 12
-          xcrun simctl io "$UDID" screenshot shots/02-home.png
+          xcrun simctl io "$UDID" screenshot shots/02-home-light.png
+
+          # 3) Same state in dark mode: Home glows on indigo
+          xcrun simctl ui "$UDID" appearance dark || true
+          sleep 4
+          xcrun simctl io "$UDID" screenshot shots/03-home-dark.png
+          xcrun simctl terminate "$UDID" com.sidequests.SideQuests || true
+
+          # 4) Fresh onboarding in dark mode
+          xcrun simctl spawn "$UDID" defaults delete com.sidequests.SideQuests "sidequests.state.v1" || true
+          xcrun simctl launch "$UDID" com.sidequests.SideQuests
+          sleep 10
+          xcrun simctl io "$UDID" screenshot shots/04-onboarding-dark.png
 
       - name: Publish result branch
         if: always()

@@ -217,10 +217,8 @@ struct ActiveQuestCard: View {
         HStack(spacing: 14) {
             ZStack {
                 ProgressRing(progress: fraction, colors: quest.category.gradientColors, lineWidth: 4.5)
-                    .frame(width: 46, height: 46)
-                Image(systemName: quest.category.icon)
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(quest.category.accent)
+                    .frame(width: 52, height: 52)
+                ArenaThumb(category: quest.category, size: 40)
             }
 
             VStack(alignment: .leading, spacing: 3) {
@@ -330,11 +328,7 @@ struct SuggestionCard: View {
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 14) {
-                Image(systemName: quest.category.icon)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(.white)
-                    .frame(width: 44, height: 44)
-                    .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(quest.category.gradient))
+                ArenaTile(category: quest.category, size: 48, radius: 15)
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(quest.title)

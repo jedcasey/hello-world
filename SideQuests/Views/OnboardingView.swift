@@ -83,15 +83,15 @@ struct OnboardingView: View {
                 .font(.system(size: 32, weight: .bold, design: .default))
                 .foregroundStyle(Palette.textPrimary)
 
-            explainRow(icon: "scroll.fill", tint: QuestCategory.adventure.accent,
+            explainRow(category: .adventure,
                        title: "Choose a quest",
                        body: "Sixty real-world challenges across six arenas of life. No busywork — every one changes you.")
 
-            explainRow(icon: "flame.fill", tint: QuestCategory.physical.accent,
+            explainRow(category: .physical,
                        title: "Log honest progress",
                        body: "One step at a time. Some quests take an afternoon, some take ninety days of showing up.")
 
-            explainRow(icon: "crown.fill", tint: Palette.gold,
+            explainRow(category: nil,
                        title: "Earn XP, climb the ranks",
                        body: "From Drifter to Legend. The rank is a mirror — the life you build along the way is the prize.")
         }
@@ -99,13 +99,22 @@ struct OnboardingView: View {
         .frame(maxHeight: .infinity)
     }
 
-    private func explainRow(icon: String, tint: Color, title: String, body text: String) -> some View {
+    private func explainRow(category: QuestCategory?, title: String, body text: String) -> some View {
         HStack(alignment: .top, spacing: 16) {
-            Image(systemName: icon)
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(tint)
-                .frame(width: 48, height: 48)
-                .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(Palette.fill))
+            if let category {
+                ArenaTile(category: category, size: 48, radius: 15)
+            } else {
+                // The summit photograph stands in for the climb itself.
+                Image("manifesto")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 48, height: 48)
+                    .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .strokeBorder(Palette.gold.opacity(0.55), lineWidth: 1)
+                    )
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
@@ -146,37 +155,41 @@ struct OnboardingView: View {
         .scrollIndicators(.hidden)
     }
 
+    // Each arena introduces itself with its own photograph; selection is a
+    // gradient ring and a check, not a flood fill.
     private func arenaTile(_ category: QuestCategory) -> some View {
         let isOn = selected.contains(category)
         return Button {
             if isOn { selected.remove(category) } else { selected.insert(category) }
             Haptics.light()
         } label: {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Image(systemName: category.icon)
-                        .font(.system(size: 17, weight: .semibold))
-                        .foregroundStyle(isOn ? Color.white : category.accent)
-                        .symbolEffect(.bounce, value: isOn)
-                    Spacer()
-                    Image(systemName: isOn ? "checkmark.circle.fill" : "circle")
-                        .font(.system(size: 17))
-                        .foregroundStyle(isOn ? Color.white : Palette.textTertiary)
-                        .contentTransition(.symbolEffect(.replace))
+            ZStack(alignment: .topTrailing) {
+                VStack(alignment: .leading) {
+                    Spacer(minLength: 0)
+                    Text(category.title)
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundStyle(Palette.textPrimary)
+                        .shadow(color: Palette.bg.opacity(0.7), radius: 3, y: 1)
                 }
-                Spacer(minLength: 0)
-                Text(category.title)
-                    .font(.system(size: 17, weight: .bold))
-                    .foregroundStyle(isOn ? Color.white : Palette.textPrimary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(14)
+
+                Image(systemName: isOn ? "checkmark.circle.fill" : "circle")
+                    .font(.system(size: 18))
+                    .foregroundStyle(isOn ? category.accent : Palette.textTertiary)
+                    .contentTransition(.symbolEffect(.replace))
+                    .padding(6)
+                    .background(Circle().fill(.ultraThinMaterial))
+                    .padding(8)
             }
-            .padding(14)
-            .frame(height: 96, alignment: .topLeading)
-            .background(
+            .frame(height: 108)
+            .background(ArenaImage(category: category))
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .overlay(
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(isOn ? AnyShapeStyle(category.gradient) : AnyShapeStyle(Palette.card))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .strokeBorder(isOn ? Color.white.opacity(0.25) : Palette.stroke, lineWidth: 1)
+                    .strokeBorder(
+                        isOn ? AnyShapeStyle(category.gradient) : AnyShapeStyle(Palette.stroke),
+                        lineWidth: isOn ? 2 : 1
                     )
             )
         }

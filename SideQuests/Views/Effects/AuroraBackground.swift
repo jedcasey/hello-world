@@ -5,12 +5,14 @@ import SwiftUI
 /// prefers reduced motion.
 struct AuroraBackground: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var scheme
     @State private var start = Date()
 
     var body: some View {
         if reduceMotion {
             AmbientBackground()
         } else {
+            let dark: Float = scheme == .dark ? 1 : 0
             TimelineView(.animation(minimumInterval: 1.0 / 24.0)) { timeline in
                 let t = timeline.date.timeIntervalSince(start)
                 Rectangle()
@@ -19,7 +21,8 @@ struct AuroraBackground: View {
                         view.colorEffect(
                             ShaderLibrary.aurora(
                                 .float2(proxy.size),
-                                .float(t)
+                                .float(t),
+                                .float(dark)
                             )
                         )
                     }

@@ -26,7 +26,7 @@ Sixty hand-curated quests — from *"Run a 5K without stopping"* to *"Host a din
 - **Daily calls to adventure** — three suggested quests, freshly picked (deterministically) each day
 - **Celebration moments** — confetti, haptics, and rank-up reveals when a quest completes
 - **Journey screen** — rank progress, arena mastery bars, lifetime stats, and a trophy log of everything you've finished
-- **Considered design** — near-black, typographic “Nightfall” aesthetic; hierarchy in steps of white; dusty per-arena tones; AI-generated night photography with one locked cinematic style; a floating liquid-glass tab bar
+- **Considered design** — the adaptive “Ascent” aesthetic: warm morning cream by day, luminous indigo night by dark (think Oura, not a cave); one sunrise-amber accent; vivid per-arena tones; golden-hour photography with one locked aspirational style; a floating liquid-glass tab bar
 - **Custom Metal shaders** — living aurora background, gold shimmer sweeps, film grain over artwork, a completion shockwave, and a glass sheen on the tab bar
 - **Gestures & haptics** — swipe-to-log with rubber-banding and particle pops, CoreHaptics crescendos for completion and rank-ups, bouncy spring motion everywhere
 
@@ -36,7 +36,7 @@ Sixty hand-curated quests — from *"Run a 5K without stopping"* to *"Host a din
 - No dependencies — pure SwiftUI + Foundation + Metal + CoreHaptics
 - State persisted locally via `Codable` JSON in `UserDefaults`
 - Xcode 16 project (file-system-synchronized groups)
-- Arena artwork generated with Nano Banana 2 (Google), one locked prompt template for a consistent studio look
+- Arena artwork generated with Nano Banana 2 (Google), one locked golden-hour prompt template for a consistent aspirational look
 - See `docs/DESIGN.md` for the design language and `docs/ARCHITECTURE.md` for structure
 
 ## Running it

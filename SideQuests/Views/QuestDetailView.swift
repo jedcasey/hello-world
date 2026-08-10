@@ -73,12 +73,8 @@ struct QuestDetailView: View {
 
     private var hero: some View {
         VStack(spacing: 16) {
-            Image(systemName: quest.category.icon)
-                .font(.system(size: 30, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(width: 84, height: 84)
-                .background(Circle().fill(quest.category.gradient))
-                .shadow(color: quest.category.accent.opacity(0.45), radius: 22, y: 6)
+            ArenaThumb(category: quest.category, size: 88)
+                .shadow(color: quest.category.accent.opacity(0.35), radius: 22, y: 6)
 
             Text(quest.category.title)
                 .font(.system(size: 12, weight: .bold))

@@ -54,7 +54,6 @@ struct RootView: View {
         }
         .animation(.easeOut(duration: 0.3), value: store.celebration?.id)
         .animation(.easeOut(duration: 0.4), value: store.hasOnboarded)
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -122,7 +121,7 @@ struct TabBar: View {
         }
         .overlay(Capsule().strokeBorder(Palette.stroke, lineWidth: 1))
         .clipShape(Capsule())
-        .shadow(color: .black.opacity(0.45), radius: 20, y: 8)
+        .shadow(color: .black.opacity(0.22), radius: 20, y: 8)
     }
 }
 
@@ -138,7 +137,7 @@ struct CelebrationView: View {
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.72).ignoresSafeArea()
+            Color.black.opacity(0.55).ignoresSafeArea()
             ConfettiView().ignoresSafeArea()
 
             TimelineView(.animation(minimumInterval: 1.0 / 60.0)) { timeline in
@@ -175,12 +174,8 @@ struct CelebrationView: View {
 
     private var card: some View {
         VStack(spacing: 18) {
-            Image(systemName: celebration.quest.category.icon)
-                .font(.system(size: 34, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(width: 88, height: 88)
-                .background(Circle().fill(celebration.quest.category.gradient))
-                .shadow(color: celebration.quest.category.accent.opacity(0.5), radius: 24)
+            ArenaThumb(category: celebration.quest.category, size: 92)
+                .shadow(color: celebration.quest.category.accent.opacity(0.45), radius: 24)
 
             Text("Quest complete")
                 .font(.system(size: 13, weight: .bold))
@@ -224,10 +219,15 @@ struct CelebrationView: View {
             } label: {
                 Text("Onward")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                     .padding(.horizontal, 44)
                     .padding(.vertical, 15)
-                    .background(Capsule().fill(Palette.gold))
+                    .background(
+                        Capsule().fill(
+                            LinearGradient(colors: [Palette.gold, Palette.goldDeep],
+                                           startPoint: .topLeading, endPoint: .bottomTrailing)
+                        )
+                    )
             }
             .buttonStyle(PressableStyle())
             .padding(.top, 10)
@@ -236,7 +236,7 @@ struct CelebrationView: View {
         .background(
             RoundedRectangle(cornerRadius: 36, style: .continuous)
                 .fill(Palette.bg)
-                .shadow(color: .black.opacity(0.6), radius: 40, y: 16)
+                .shadow(color: .black.opacity(0.35), radius: 40, y: 16)
         )
         .padding(.horizontal, 24)
         .scaleEffect(appeared ? 1 : 0.85)
